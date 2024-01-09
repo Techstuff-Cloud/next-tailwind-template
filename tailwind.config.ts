@@ -2,9 +2,13 @@ import type { Config } from 'tailwindcss';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import animate from 'tailwindcss-animate';
-
 import { skeleton } from '@skeletonlabs/tw-plugin';
-import { baseTheme } from './themes/base';
+import {
+  myCustomThemeFour,
+  myCustomThemeOne,
+  myCustomThemeThree,
+  myCustomThemeTwo,
+} from './themes/base';
 
 const config = {
   darkMode: 'class',
@@ -29,44 +33,44 @@ const config = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-primary-500']})`,
-          foreground: `rgb(${baseTheme.properties['--color-primary-50']})`,
+          DEFAULT: `rgb(var(--color-primary-500))`,
+          foreground: `rgb(var(--color-primary-50))`,
         },
         secondary: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-secondary-500']})`,
-          foreground: `rgb(${baseTheme.properties['--color-secondary-50']})`,
+          DEFAULT: `rgb(var(--color-secondary-500))`,
+          foreground: `rgb(var(--color-secondary-50))`,
         },
         tertiary: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-tertiary-500']})`,
-          foreground: `rgb(${baseTheme.properties['--color-tertiary-50']})`,
+          DEFAULT: `rgb(var(--color-tertiary-500))`,
+          foreground: `rgb(var(--color-tertiary-50))`,
         },
         success: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-success-500']})`,
-          foreground: `rgb(${baseTheme.properties['--color-success-50']})`,
+          DEFAULT: `rgb(var(--color-success-500))`,
+          foreground: `rgb(var(--color-success-50))`,
         },
         warning: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-warning-500']})`,
-          foreground: `rgb(${baseTheme.properties['--color-warning-50']})`,
+          DEFAULT: `rgb(var(--color-warning-500))`,
+          foreground: `rgb(var(--color-warning-50))`,
         },
         destructive: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-error-500']})`,
-          foreground: `rgb(${baseTheme.properties['--color-error-50']})`,
+          DEFAULT: `rgb(var(--color-error-500))`,
+          foreground: `rgb(var(--color-error-50))`,
         },
         muted: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-surface-100']})`,
-          foreground: `rgb(${baseTheme.properties['--color-surface-600']})`,
+          DEFAULT: `rgb(var(--color-surface-100))`,
+          foreground: `rgb(var(--color-surface-600))`,
         },
         accent: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-tertiary-700']})`,
-          foreground: `rgb(${baseTheme.properties['--color-tertiary-200']})`,
+          DEFAULT: `rgb(var(--color-tertiary-700))`,
+          foreground: `rgb(var(--color-tertiary-200))`,
         },
         popover: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-surface-50']})`,
-          foreground: `rgb(${baseTheme.properties['--color-surface-700']})`,
+          DEFAULT: `rgb(var(--color-surface-50))`,
+          foreground: `rgb(var(--color-surface-700))`,
         },
         card: {
-          DEFAULT: `rgb(${baseTheme.properties['--color-surface-200']})`,
-          foreground: `rgb(${baseTheme.properties['--color-surface-900']})`,
+          DEFAULT: `rgb(var(--color-surface-200))`,
+          foreground: `rgb(var(--color-surface-900))`,
         },
       },
       borderRadius: {
@@ -91,43 +95,18 @@ const config = {
     },
   },
   plugins: [
-    function ({
-      addUtilities,
-      e,
-    }: {
-      addUtilities: any;
-      e: (className: string) => string;
-    }) {
-      const newUtilities = {
-        [`button.${e('bg-primary')}:hover`]: {
-          backgroundColor: `rgb(${baseTheme.properties['--color-primary-400']}) !important`,
-        },
-        [`button.${e('bg-secondary')}:hover`]: {
-          backgroundColor: `rgb(${baseTheme.properties['--color-secondary-400']}) !important`,
-        },
-        [`button.${e('bg-destructive')}:hover`]: {
-          backgroundColor: `rgb(${baseTheme.properties['--color-error-400']}) !important`,
-        },
-        [`button.${e('bg-tertiary')}:hover`]: {
-          backgroundColor: `rgb(${baseTheme.properties['--color-tertiary-400']}) !important`,
-        },
-        [`button.${e('bg-warning')}:hover`]: {
-          backgroundColor: `rgb(${baseTheme.properties['--color-warning-400']}) !important`,
-        },
-        [`button.${e('bg-success')}:hover`]: {
-          backgroundColor: `rgb(${baseTheme.properties['--color-success-400']}) !important`,
-        },
-      };
-
-      addUtilities(newUtilities, ['responsive', 'hover']);
-    },
     forms,
     typography,
     animate,
     skeleton({
       themes: {
         preset: ['skeleton'],
-        custom: [baseTheme],
+        custom: [
+          myCustomThemeOne,
+          myCustomThemeTwo,
+          myCustomThemeThree,
+          myCustomThemeFour,
+        ],
       },
     }),
   ],

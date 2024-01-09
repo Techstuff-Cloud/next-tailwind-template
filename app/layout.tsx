@@ -1,8 +1,11 @@
-import './globals.css';
+import { SettingContext } from '@/_context/ThemeContext';
+import WrapperComponent from '@/app/demo/shadcn-atoms/WrapperComponent';
+import { SideNavbarComponent } from '@/components/SideNavbar';
+import TopNavbarComponent from '@/components/TopNavbar';
+import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import * as React from 'react';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Template Next App',
@@ -15,10 +18,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='dark'>
-      <body data-theme='baseTheme' className={inter.className}>
-        {children}
-      </body>
-    </html>
+    <SettingContext>
+      <WrapperComponent>
+        <div className='flex'>
+          <SideNavbarComponent />
+          <div className='flex flex-col w-full'>
+            <TopNavbarComponent />
+            {children}
+            <Toaster />
+          </div>
+        </div>
+      </WrapperComponent>
+    </SettingContext>
   );
 }
