@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
+import Page from '@/components/ComponentWrapper';
 
-export const ButtonComponent = () => {
+const ButtonComponent = () => {
   return (
     <div className='flex mx-40 flex-wrap gap-x-20 gap-y-10'>
       <Button>primary</Button>
@@ -24,3 +25,5 @@ export const ButtonComponent = () => {
     </div>
   );
 };
+
+export default Page(ButtonComponent);

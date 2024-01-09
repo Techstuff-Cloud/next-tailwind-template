@@ -6,10 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import Page from '@/components/ComponentWrapper';
 
-export const CardComponent = () => {
+const CardComponent = () => {
   return (
-    <Card className='max-w-3xl w-full shadow-2xl'>
+    <Card className='w-full'>
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Card Description</CardDescription>
@@ -23,3 +24,5 @@ export const CardComponent = () => {
     </Card>
   );
 };
+
+export default Page(CardComponent);
