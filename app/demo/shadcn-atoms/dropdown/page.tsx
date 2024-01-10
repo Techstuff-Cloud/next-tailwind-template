@@ -16,7 +16,7 @@ const DropdownMenuComponent = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <p className='text-muted-foreground'>Themes</p>
+        <p className='font-medium'>Themes</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {Object.keys(themeList).map((theme) => (

@@ -61,7 +61,7 @@ const config = {
           foreground: `rgb(var(--color-surface-600))`,
         },
         accent: {
-          DEFAULT: `rgb(var(--color-tertiary-700))`,
+          DEFAULT: `rgb(var(--color-tertiary-500))`,
           foreground: `rgb(var(--color-tertiary-200))`,
         },
         popover: {
@@ -95,6 +95,29 @@ const config = {
     },
   },
   plugins: [
+    function ({
+      addUtilities,
+      e,
+    }: {
+      addUtilities: any;
+      e: (className: string) => string;
+    }) {
+      const newUtilities = {
+        [`button.${e('bg-tertiary')}:hover`]: {
+          backgroundColor: `rgb(var(--color-tertiary-400)) !important`,
+        },
+        [`button.${e('bg-warning')}:hover`]: {
+          backgroundColor: `rgb(var(--color-warning-400)) !important`,
+        },
+        [`button.${e('bg-success')}`]: {
+          color: `black !important`,
+        },
+        [`button.${e('bg-success')}:hover`]: {
+          backgroundColor: `rgb(var(--color-success-400)) !important`,
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
     forms,
     typography,
     animate,
