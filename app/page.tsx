@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
@@ -7,6 +9,15 @@ export default function Home() {
         <Image src='/next.svg' alt='Next.js Logo' width={200} height={200} />
         <h1 className='h5 mt-8'>Next.js</h1>
         <p className='text-xl mt-4'>with Tailwind CSS</p>
+
+        <Link href='/demo/shadcn-atoms/accordian' className='mt-10'>
+          <Button
+            variant='link'
+            className='text-base text-black dark:text-white'
+          >
+            Navigate to shadcn Components Page
+          </Button>
+        </Link>
       </div>
     </main>
   );
