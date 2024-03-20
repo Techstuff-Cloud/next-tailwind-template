@@ -14,12 +14,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <SettingContext>
       <WrapperComponent>
-        <div className='flex'>
-          <div className='flex flex-col w-full'>
-            {children}
-            <Toaster />
-          </div>
-        </div>
+        {children}
+        <Toaster />
       </WrapperComponent>
     </SettingContext>
   );
