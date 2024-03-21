@@ -9,7 +9,9 @@ export function middleware(request: NextRequest) {
     return Response.redirect(new URL('/', request.url));
   }
 
-  if (!token && protectedRoutes.includes(request.nextUrl.pathname)) {
+  const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route));
+
+  if (!token && isProtectedRoute) {
     return Response.redirect(new URL('/login', request.url));
   }
 }
