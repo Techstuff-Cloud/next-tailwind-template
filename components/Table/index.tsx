@@ -12,7 +12,6 @@ import DATA from './data/tasks.json';
 // Simulate a database read for tasks.
 
 export default async function TaskPage() {
-  console.log('DATA', DATA);
   const tasks = DATA;
 
   return (
