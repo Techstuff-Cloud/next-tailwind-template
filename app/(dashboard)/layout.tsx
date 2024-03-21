@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Created with next-tailwind-template',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className='flex'>
       <SideNavbarComponent />
