@@ -3,18 +3,20 @@
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Table } from '@tanstack/react-table';
 
-import { priorities, statuses } from '../data/data';
 import { DataTableFacetedFilter } from './data-table-faceted-filter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { DataTableViewOptions } from './data-table-view-options';
+import { Filter } from '@/constants/types/Table';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  filters: Filter[];
 }
 
 export function DataTableToolbar<TData>({
   table,
+  filters,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -29,20 +31,19 @@ export function DataTableToolbar<TData>({
           }
           className='h-8 w-[150px] lg:w-[250px]'
         />
-        {table.getColumn('status') && (
-          <DataTableFacetedFilter
-            column={table.getColumn('status')}
-            title='Status'
-            options={statuses}
-          />
-        )}
-        {table.getColumn('priority') && (
-          <DataTableFacetedFilter
-            column={table.getColumn('priority')}
-            title='Priority'
-            options={priorities}
-          />
-        )}
+        {filters.map((filter) => {
+          if (table.getColumn(filter.name)) {
+            return (
+              <DataTableFacetedFilter
+                key={filter.name}
+                column={table.getColumn(filter.name)}
+                title={filter.name.toUpperCase()}
+                options={filter.options}
+              />
+            );
+          }
+        })}
+
         {isFiltered && (
           <Button
             variant='ghost'

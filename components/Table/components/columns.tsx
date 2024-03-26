@@ -60,6 +60,7 @@ export const columns: ColumnDef<Task>[] = [
         </div>
       );
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'status',
@@ -87,6 +88,7 @@ export const columns: ColumnDef<Task>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'priority',
@@ -114,6 +116,7 @@ export const columns: ColumnDef<Task>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },
+    enableSorting: false,
   },
   {
     id: 'actions',
