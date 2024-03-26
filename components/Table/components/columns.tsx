@@ -118,8 +118,8 @@ export const columns: ColumnDef<Task>[] = [
     },
     enableSorting: false,
   },
-  {
-    id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} />,
-  },
+  // {
+  //   id: 'actions',
+  //   cell: ({ row }) => <DataTableRowActions row={row} />,
+  // },
 ];

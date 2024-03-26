@@ -3,11 +3,8 @@ import Image from 'next/image';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
 import { UserNav } from './components/user-nav';
-import DATA from './data/tasks.json';
 
 export default async function TaskPage() {
-  const tasks = DATA;
-
   return (
     <>
       <div className='md:hidden'>
@@ -38,7 +35,7 @@ export default async function TaskPage() {
             <UserNav />
           </div>
         </div>
-        <DataTable data={tasks} columns={columns} />
+        <DataTable />
       </div>
     </>
   );

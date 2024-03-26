@@ -1,71 +1,23 @@
-import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckCircledIcon,
-  CircleIcon,
-  CrossCircledIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon,
-} from '@radix-ui/react-icons';
+import * as Yup from 'yup';
 
-export const labels = [
-  {
-    value: 'bug',
-    label: 'Bug',
-  },
-  {
-    value: 'feature',
-    label: 'Feature',
-  },
-  {
-    value: 'documentation',
-    label: 'Documentation',
-  },
-];
+export const validationSchema = Yup.object().shape({
+  multiSelect: Yup.array().min(1, 'Please select at least one option'),
+  name: Yup.string().required('Name is required'),
+  textArea: Yup.string().required('Text area is required'),
+  social: Yup.object().shape({
+    facebook: Yup.string().required('Facebook field is required'),
+    twitter: Yup.string().required('Twitter field is required'),
+  }),
+  jobType: Yup.string().required('Job Type is required'),
+});
 
-export const statuses = [
-  {
-    value: 'backlog',
-    label: 'Backlog',
-    icon: QuestionMarkCircledIcon,
+export const initialValues = {
+  multiSelect: ['Option 1', 'Option 2'],
+  name: '',
+  textArea: '',
+  social: {
+    facebook: '',
+    twitter: '',
   },
-  {
-    value: 'todo',
-    label: 'Todo',
-    icon: CircleIcon,
-  },
-  {
-    value: 'in progress',
-    label: 'In Progress',
-    icon: StopwatchIcon,
-  },
-  {
-    value: 'done',
-    label: 'Done',
-    icon: CheckCircledIcon,
-  },
-  {
-    value: 'canceled',
-    label: 'Canceled',
-    icon: CrossCircledIcon,
-  },
-];
-
-export const priorities = [
-  {
-    label: 'Low',
-    value: 'low',
-    icon: ArrowDownIcon,
-  },
-  {
-    label: 'Medium',
-    value: 'medium',
-    icon: ArrowRightIcon,
-  },
-  {
-    label: 'High',
-    value: 'high',
-    icon: ArrowUpIcon,
-  },
-];
+  jobType: '',
+};

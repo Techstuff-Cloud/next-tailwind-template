@@ -3,14 +3,10 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
 
-import { labels } from '../data/data';
-import { taskSchema } from '../data/schema';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuSub,
@@ -22,13 +18,17 @@ import { Button } from '@/components/ui/button';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
+  getById: (id: string) => Promise<void>;
+  deleteData: (id: string) => Promise<void>;
+  handleDrawerOpen: (id: string) => void;
 }
 
 export function DataTableRowActions<TData>({
   row,
+  getById,
+  deleteData,
+  handleDrawerOpen,
 }: DataTableRowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,20 +41,26 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
-        <DropdownMenuItem>Edit</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => handleDrawerOpen(row.renderValue('_id'))}
+        >
+          Edit
+        </DropdownMenuItem>
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => deleteData(row.renderValue('_id'))}>
+          Delete
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
+            {/* <DropdownMenuRadioGroup value={task.label}>
               {labels.map((label) => (
                 <DropdownMenuRadioItem key={label.value} value={label.value}>
                   {label.label}
                 </DropdownMenuRadioItem>
               ))}
-            </DropdownMenuRadioGroup>
+            </DropdownMenuRadioGroup> */}
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
