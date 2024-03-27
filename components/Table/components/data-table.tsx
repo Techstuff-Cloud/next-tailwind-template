@@ -355,9 +355,6 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
       />
 
       <Drawer direction='right' open={openDrawer} onOpenChange={setOpenDrawer}>
-        <DrawerTrigger asChild>
-          <Button variant='outline'>Edit Profile</Button>
-        </DrawerTrigger>
         <ScrollArea>
           <DrawerContent className='h-screen top-0 right-0 left-auto mt-0 w-[500px] rounded-none'>
             <DrawerHeader className='text-left'>
@@ -410,17 +407,6 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
             </div>
           </DrawerContent>
         </ScrollArea>
-        {/* 
-        <DrawerContent className='h-screen top-0 right-0 left-auto mt-0 w-[500px] rounded-none'>
-          <ScrollArea>
-            <div className='mx-auto w-full max-w-sm'>
-              <DrawerHeader>
-                <DrawerTitle>Create</DrawerTitle>
-              </DrawerHeader>
-            
-            </div>
-          </ScrollArea>
-        </DrawerContent> */}
       </Drawer>
     </div>
   );
