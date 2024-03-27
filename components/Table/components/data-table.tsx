@@ -57,7 +57,7 @@ import FormilNestedInput from '@/components/Formik/FormilNestedInput';
 import FormikMultiSelect from '@/components/Formik/FormikMultiSelect';
 import FormikTextArea from '@/components/Formik/FormikTextArea';
 import { initialValues, validationSchema } from '../data/data';
-import { MultiSelectDemo } from '@/components/Formik/MultiSelect';
+import { MultiSelectDropDown } from '@/components/Formik/MultiSelect';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const options = [

@@ -53,6 +53,7 @@ export const useDBOperations = <T,>(endPoint: string) => {
     toggleLoader,
     document,
     handleDocumentDataChange,
+    // @ts-ignore
   } = useResources<T>();
 
   const fetchAll = async () => {

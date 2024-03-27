@@ -27,7 +27,7 @@ type MultiSelectProp = {
   onChange: (option: any[]) => void;
 };
 
-export function MultiSelectDemo({
+export function MultiSelectDropDown({
   name,
   value,
   options,

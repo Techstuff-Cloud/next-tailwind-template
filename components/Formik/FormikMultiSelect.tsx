@@ -1,7 +1,6 @@
 import { useField } from 'formik';
 import React from 'react';
-import MultiSelectDropdown from '../MultiSelect/MultiSelect';
-import { MultiSelectDemo } from './MultiSelect';
+import { MultiSelectDropDown } from './MultiSelect';
 import { FormikFieldProp } from './types';
 
 interface FormikMultiSelectProp extends FormikFieldProp {
@@ -16,19 +15,13 @@ const FormikMultiSelect = ({ label, ...props }: FormikMultiSelectProp) => {
       <label htmlFor={props.id || props.name} className='mb-1'>
         {label}
       </label>
-      <MultiSelectDemo
+      <MultiSelectDropDown
         value={field.value}
         name={props.name}
         options={props.options}
         onChange={(selected: any) => helpers.setValue(selected)}
       />
-      {/* <MultiSelectDropdown
-        prompt={label}
-        value={field.value}
-        formFieldName={props.name}
-        options={props.options}
-        onChange={(selected: any) => helpers.setValue(selected)}
-      /> */}
+
       {meta.touched && meta.error ? (
         <div className='error  text-red-500 mt-2'>{meta.error}</div>
       ) : null}
