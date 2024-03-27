@@ -31,8 +31,10 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from '@/components/ui/drawer';
 import { useEffect } from 'react';
 import TableLoader from './tableLoader';
@@ -54,8 +56,16 @@ import FormikSelect from '@/components/Formik/FormikSelect';
 import FormilNestedInput from '@/components/Formik/FormilNestedInput';
 import FormikMultiSelect from '@/components/Formik/FormikMultiSelect';
 import FormikTextArea from '@/components/Formik/FormikTextArea';
+import { initialValues, validationSchema } from '../data/data';
+import { MultiSelectDemo } from '@/components/Formik/MultiSelect';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
-const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+const options = [
+  { value: 'Option 1', label: 'Option 1' },
+  { value: 'Option 2', label: 'Option 2' },
+  { value: 'Option 3', label: 'Option 3' },
+  { value: 'Option 4', label: 'Option 4' },
+];
 
 interface DataTableProps<TData, TValue> {}
 
@@ -105,14 +115,25 @@ const filters: Filter[] = [
 ];
 
 export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
-  const { fetchAll, data, loading, document, create, deleteData, getById } =
-    useDBOperations('users');
+  const {
+    totalPages,
+    pageNumber,
+    data,
+    loading,
+    columnFilters,
+    sorting,
+    setSorting,
+    rowsPerPageChange,
+    setColumnFilters,
+    nextPage,
+    prevPage,
+    deleteData,
+    getById,
+    fetchDataPaginated,
+  } = useDBOperations('users');
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [sorting, setSorting] = useState<SortingState>([]);
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const columns: ColumnDef<any>[] = [
     {
@@ -123,7 +144,9 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
             table.getIsAllPageRowsSelected() ||
             (table.getIsSomePageRowsSelected() && 'indeterminate')
           }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          onCheckedChange={(value: any) =>
+            table.toggleAllPageRowsSelected(!!value)
+          }
           aria-label='Select all'
           className='translate-y-[2px]'
         />
@@ -131,7 +154,7 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
       cell: ({ row }) => (
         <Checkbox
           checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          onCheckedChange={(value: any) => row.toggleSelected(!!value)}
           aria-label='Select row'
           className='translate-y-[2px]'
         />
@@ -162,7 +185,7 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
           </div>
         );
       },
-      enableSorting: false,
+      enableSorting: true,
     },
     {
       accessorKey: 'lastName',
@@ -251,88 +274,22 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
     setOpenDrawer(true);
   };
 
-  const toggleOption = (option: string) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
-  };
-
-  const appendFilterParams = (paramsArray: FilterProp[]) => {
-    const queryString = paramsArray
-      .map((param) => {
-        const paramName = encodeURIComponent(param.id);
-        const values = Array.isArray(param.value)
-          ? param.value.map((val) => encodeURIComponent(val)).join(',')
-          : encodeURIComponent(param.value);
-        return `${paramName}=${values}`;
-      })
-      .join('&');
-
-    return `?${queryString}`;
-  };
-
-  const appendSortParams = (paramsArray: SortProp[]) => {
-    const queryString = paramsArray
-      .map((param) => {
-        const paramName = encodeURIComponent(param.id);
-        const values = encodeURIComponent(param.desc ? 'DESC' : 'ASC');
-        return `${paramName}=${values}`;
-      })
-      .join('&');
-
-    return `?${queryString}`;
-  };
-
-  const appendPaginationParams = (paramsArray: SortProp[]) => {
-    const queryString = paramsArray
-      .map((param) => {
-        const paramName = encodeURIComponent(param.id);
-        const values = encodeURIComponent(param.desc ? 'DESC' : 'ASC');
-        return `${paramName}=${values}`;
-      })
-      .join('&');
-
-    return `?${queryString}`;
-  };
-
-  // useEffect(() => {
-  //   console.log(
-  //     'columnFilters',
-  //     appendFilterParams(columnFilters as unknown as FilterProp[])
-  //   );
-  // }, [columnFilters]);
-
-  // useEffect(() => {
-  //   console.log('sorting', appendSortParams(sorting));
-  // }, [sorting]);
-
-  // useEffect(() => {
-  //   console.log('rowSelection', rowSelection);
-  // }, [rowSelection]);
-
-  // useEffect(() => {
-  //   console.log('APPLIED FILTER', filters);
-  // }, []);
+  useEffect(() => {
+    console.log('APPLIED FILTER', filters);
+  }, []);
 
   useEffect(() => {
-    console.log('data', data);
-    console.log('loading', loading);
-    console.log('document', document);
-  }, [loading, data, document]);
-
-  useEffect(() => {
-    fetchAll();
+    fetchDataPaginated(1, 10);
   }, []);
 
   return (
     <div className='space-y-4'>
-      <button className='btn' onClick={() => setOpenDrawer(true)}>
-        Create
-      </button>
-
-      <DataTableToolbar filters={filters} table={table} />
+      <DataTableToolbar
+        filters={filters}
+        table={table}
+        fieldSearch={'email'}
+        setOpenDrawer={setOpenDrawer}
+      />
 
       {loading ? (
         <TableLoader />
@@ -388,27 +345,33 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
           </Table>
         </div>
       )}
-      <DataTablePagination table={table} />
+      <DataTablePagination
+        table={table}
+        totalPages={totalPages}
+        pageNumber={pageNumber}
+        rowsPerPageChange={rowsPerPageChange}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
 
-      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
-        <DrawerContent>
-          <div className='mx-auto w-full max-w-sm'>
-            <DrawerHeader>
-              <DrawerTitle>Move Goal</DrawerTitle>
-              <DrawerDescription>
-                Set your daily activity goal.
-              </DrawerDescription>
+      <Drawer direction='right' open={openDrawer} onOpenChange={setOpenDrawer}>
+        <DrawerTrigger asChild>
+          <Button variant='outline'>Edit Profile</Button>
+        </DrawerTrigger>
+        <ScrollArea>
+          <DrawerContent className='h-screen top-0 right-0 left-auto mt-0 w-[500px] rounded-none'>
+            <DrawerHeader className='text-left'>
+              <DrawerTitle>Create</DrawerTitle>
             </DrawerHeader>
             <div className='p-4 pb-0'>
               <Formik
-                initialValues={{
-                  multiSelect: ['Option 1', 'Option 2'],
-                }}
+                initialValues={initialValues}
+                validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   console.log('values', values);
                 }}
               >
-                <Form>
+                <Form className='flex flex-col gap-4'>
                   <div className='relative inline-block text-left'>
                     <FormikMultiSelect
                       name='multiSelect'
@@ -427,7 +390,7 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
                     name='social.twitter'
                   />
                   <FormikSelect label='Job Type' name='jobType'>
-                    <SelectTrigger className='w-[180px]'>
+                    <SelectTrigger className='w-full'>
                       <SelectValue placeholder='Theme' />
                     </SelectTrigger>
                     <SelectContent>
@@ -436,16 +399,28 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
                       <SelectItem value='system'>System</SelectItem>
                     </SelectContent>
                   </FormikSelect>
-
-                  <Button type='submit'>Submit</Button>
-                  <DrawerClose asChild>
-                    <Button variant='outline'>Cancel</Button>
-                  </DrawerClose>
+                  <DrawerFooter className='pt-2'>
+                    <Button type='submit'>Submit</Button>
+                    <DrawerClose asChild>
+                      <Button variant='outline'>Cancel</Button>
+                    </DrawerClose>
+                  </DrawerFooter>
                 </Form>
               </Formik>
             </div>
-          </div>
-        </DrawerContent>
+          </DrawerContent>
+        </ScrollArea>
+        {/* 
+        <DrawerContent className='h-screen top-0 right-0 left-auto mt-0 w-[500px] rounded-none'>
+          <ScrollArea>
+            <div className='mx-auto w-full max-w-sm'>
+              <DrawerHeader>
+                <DrawerTitle>Create</DrawerTitle>
+              </DrawerHeader>
+            
+            </div>
+          </ScrollArea>
+        </DrawerContent> */}
       </Drawer>
     </div>
   );

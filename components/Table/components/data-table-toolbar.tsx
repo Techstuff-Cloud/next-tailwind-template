@@ -2,33 +2,39 @@
 
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Table } from '@tanstack/react-table';
-
+import { debounce } from 'lodash';
 import { DataTableFacetedFilter } from './data-table-faceted-filter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { DataTableViewOptions } from './data-table-view-options';
 import { Filter } from '@/constants/types/Table';
+import { Dispatch, SetStateAction } from 'react';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   filters: Filter[];
+  fieldSearch: string;
+  setOpenDrawer: Dispatch<SetStateAction<boolean>>;
 }
 
 export function DataTableToolbar<TData>({
   table,
   filters,
+  fieldSearch,
+  setOpenDrawer,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
+
+  const handleFilterChange = debounce((value) => {
+    table.getColumn(fieldSearch)?.setFilterValue(value);
+  }, 500);
 
   return (
     <div className='flex items-center justify-between'>
       <div className='flex flex-1 items-center space-x-2'>
         <Input
           placeholder='Filter tasks...'
-          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('title')?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => handleFilterChange(event.target.value)}
           className='h-8 w-[150px] lg:w-[250px]'
         />
         {filters.map((filter) => {
@@ -56,6 +62,14 @@ export function DataTableToolbar<TData>({
         )}
       </div>
       <DataTableViewOptions table={table} />
+      <Button
+        variant='outline'
+        size='sm'
+        className='ml-4 hidden h-8 lg:flex'
+        onClick={() => setOpenDrawer(true)}
+      >
+        Create
+      </Button>
     </div>
   );
 }

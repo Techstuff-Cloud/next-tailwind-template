@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../axiosInterceptor';
+import { ColumnFiltersState, SortingState } from '@tanstack/react-table';
+import { FilterProp, SortProp } from '@/constants/types/Table';
 
 interface ResourcesState<T> {
   loading: boolean;
@@ -23,8 +25,6 @@ const useResources = <T extends unknown[]>(): ResourcesState<T> => {
     setDocument(data);
   };
 
-  // toggleLoader
-  // reverseValue
   const toggleLoader = () => {
     setLoading((prev) => !prev);
   };
@@ -41,6 +41,11 @@ const useResources = <T extends unknown[]>(): ResourcesState<T> => {
 
 export const useDBOperations = <T,>(endPoint: string) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(2);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
+
   const {
     loading,
     data,
@@ -63,10 +68,15 @@ export const useDBOperations = <T,>(endPoint: string) => {
     }
   };
 
-  const fetchDataPaginated = async (page: number = 1) => {
+  const fetchDataPaginated = async (
+    pageNumber: number,
+    rowsPerPage: number
+  ) => {
     try {
       toggleLoader();
-      const response = await api.get<T[]>(`/${endPoint}?page=${page}`);
+      const response = await api.get<T[]>(
+        `/${endPoint}?page=${pageNumber}&pageSize=${rowsPerPage}`
+      );
       handleDataChange(response.data);
     } catch (error) {
       console.error('Error while fetching data:', error);
@@ -76,31 +86,35 @@ export const useDBOperations = <T,>(endPoint: string) => {
     }
   };
 
+  const rowsPerPageChange = async (rowsPerPage: number) => {
+    setRowsPerPage(rowsPerPage);
+    fetchDataPaginated(pageNumber, rowsPerPage);
+  };
+
   const nextPage = async () => {
     try {
-      toggleLoader();
-      const response = await api.get<T[]>(`/${endPoint}?page=${pageNumber}`);
-      setPageNumber((prev) => prev + 1);
-      handleDataChange(response.data);
+      if (pageNumber !== totalPages) {
+        const nextPageNumber = pageNumber + 1;
+        setPageNumber(nextPageNumber);
+        console.log('pageNumber', nextPageNumber);
+        await fetchDataPaginated(nextPageNumber, rowsPerPage);
+      }
     } catch (error) {
       console.error('Error while fetching data:', error);
       throw error;
-    } finally {
-      toggleLoader();
     }
   };
 
   const prevPage = async () => {
     try {
-      toggleLoader();
-      const response = await api.get<T[]>(`/${endPoint}?page=${pageNumber}`);
-      if (pageNumber !== 1) setPageNumber((prev) => prev - 1);
-      handleDataChange(response.data);
+      if (pageNumber !== 1) {
+        const prevPageNumber = pageNumber - 1;
+        setPageNumber(prevPageNumber);
+        await fetchDataPaginated(prevPageNumber, rowsPerPage);
+      }
     } catch (error) {
       console.error('Error while fetching data:', error);
       throw error;
-    } finally {
-      toggleLoader();
     }
   };
 
@@ -144,10 +158,71 @@ export const useDBOperations = <T,>(endPoint: string) => {
     }
   };
 
+  const appendFilterParams = async (paramsArray: FilterProp[]) => {
+    try {
+      const queryString = paramsArray
+        .map((param) => {
+          const paramName = encodeURIComponent(param.id);
+          const values = Array.isArray(param.value)
+            ? param.value.map((val) => encodeURIComponent(val)).join(',')
+            : encodeURIComponent(param.value);
+          return `${paramName}=${values}`;
+        })
+        .join('&');
+
+      toggleLoader();
+      const response = await api.get<T[]>(`/${endPoint}?${queryString}`);
+      handleDataChange(response.data);
+    } catch (error) {
+      console.error('Error while fetching data:', error);
+      throw error;
+    } finally {
+      toggleLoader();
+    }
+  };
+
+  const appendSortParams = async (paramsArray: SortProp[]) => {
+    try {
+      const queryString = paramsArray
+        .map((param) => {
+          const paramName = encodeURIComponent(param.id);
+          const values = encodeURIComponent(param.desc ? 'DESC' : 'ASC');
+          return `${paramName}=${values}`;
+        })
+        .join('&');
+
+      toggleLoader();
+      const response = await api.get<T[]>(`/${endPoint}?${queryString}`);
+      handleDataChange(response.data);
+    } catch (error) {
+      console.error('Error while fetching data:', error);
+      throw error;
+    } finally {
+      toggleLoader();
+    }
+  };
+
+  useEffect(() => {
+    appendFilterParams(columnFilters as unknown as FilterProp[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnFilters]);
+
+  useEffect(() => {
+    console.log('sorting', appendSortParams(sorting));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sorting]);
+
   return {
     document,
+    columnFilters,
     loading,
     data,
+    sorting,
+    pageNumber,
+    totalPages,
+    setSorting,
+    rowsPerPageChange,
+    setColumnFilters,
     nextPage,
     prevPage,
     fetchAll,

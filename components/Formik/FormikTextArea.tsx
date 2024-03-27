@@ -1,6 +1,7 @@
 import { useField } from 'formik';
 import React from 'react';
 import { Textarea } from '../ui/textarea';
+import { FormikFieldProp } from './types';
 
 const FormikTextArea = ({ label, ...props }: FormikFieldProp) => {
   const [field, meta] = useField(props);
@@ -11,7 +12,7 @@ const FormikTextArea = ({ label, ...props }: FormikFieldProp) => {
       </label>
       <Textarea className='text-input' {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className='error'>{meta.error}</div>
+        <div className='error text-red-500 mt-2'>{meta.error}</div>
       ) : null}
     </div>
   );
