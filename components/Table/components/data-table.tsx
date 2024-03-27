@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import {
   ColumnDef,
-  ColumnFiltersState,
-  SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
@@ -15,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-
 import { DataTablePagination } from '../components/data-table-pagination';
 import { DataTableToolbar } from '../components/data-table-toolbar';
 import {
@@ -30,11 +27,9 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from '@/components/ui/drawer';
 import { useEffect } from 'react';
 import TableLoader from './tableLoader';
@@ -43,7 +38,7 @@ import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
-import { Filter, FilterProp, SortProp } from '@/constants/types/Table';
+import { Filter } from '@/constants/types/Table';
 import { useDBOperations } from '@/lib/hooks/useDBOperations';
 import {
   SelectContent,
@@ -56,9 +51,8 @@ import FormikSelect from '@/components/Formik/FormikSelect';
 import FormilNestedInput from '@/components/Formik/FormilNestedInput';
 import FormikMultiSelect from '@/components/Formik/FormikMultiSelect';
 import FormikTextArea from '@/components/Formik/FormikTextArea';
-import { initialValues, validationSchema } from '../data/data';
-import { MultiSelectDropDown } from '@/components/Formik/MultiSelect';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { initialValues, validationSchema } from '../data/data';
 
 const options = [
   { value: 'Option 1', label: 'Option 1' },
@@ -69,50 +63,7 @@ const options = [
 
 interface DataTableProps<TData, TValue> {}
 
-const filters: Filter[] = [
-  {
-    name: 'status',
-    options: [
-      {
-        value: 'backlog',
-        label: 'Backlog',
-      },
-      {
-        value: 'todo',
-        label: 'Todo',
-      },
-      {
-        value: 'in progress',
-        label: 'In Progress',
-      },
-      {
-        value: 'done',
-        label: 'Done',
-      },
-      {
-        value: 'canceled',
-        label: 'Canceled',
-      },
-    ],
-  },
-  {
-    name: 'priority',
-    options: [
-      {
-        label: 'Low',
-        value: 'low',
-      },
-      {
-        label: 'Medium',
-        value: 'medium',
-      },
-      {
-        label: 'High',
-        value: 'high',
-      },
-    ],
-  },
-];
+const filters: Filter[] = [];
 
 export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
   const {
@@ -280,6 +231,7 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
 
   useEffect(() => {
     fetchDataPaginated(1, 10);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -376,7 +328,7 @@ export function DataTable<TData, TValue>({}: DataTableProps<TData, TValue>) {
                       options={options}
                     />
                   </div>
-                  <FormikInput label='name' name='name' />
+                  <FormikInput label='Name' name='userName' />
                   <FormikTextArea label='textArea' name='textArea' />
                   <FormilNestedInput
                     label='Social Media Facebook'

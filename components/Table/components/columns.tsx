@@ -4,7 +4,6 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { DataTableColumnHeader } from './data-table-column-header';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
 
 export const columns: ColumnDef<any>[] = [
   {

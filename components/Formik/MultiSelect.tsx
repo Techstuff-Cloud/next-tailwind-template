@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Check, ChevronsUpDown, Option } from 'lucide-react';
+import { Option } from './types';
+import { Check, ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,16 +16,11 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-type Option = {
-  value: string;
-  label: string;
-};
-
 type MultiSelectProp = {
   value: any[];
   name: string;
   options: Option[];
-  onChange: (option: any[]) => void;
+  onChange: (option: string[]) => void;
 };
 
 export function MultiSelectDropDown({

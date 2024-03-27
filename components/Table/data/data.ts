@@ -2,12 +2,15 @@ import * as Yup from 'yup';
 
 export const validationSchema = Yup.object().shape({
   multiSelect: Yup.array().min(1, 'Please select at least one option'),
-  name: Yup.string().required('Name is required'),
+  userName: Yup.string().required('Name is required'),
   textArea: Yup.string().required('Text area is required'),
-  // link
   social: Yup.object().shape({
-    facebook: Yup.string().required('Facebook field is required'),
-    twitter: Yup.string().required('Twitter field is required'),
+    facebook: Yup.string()
+      .url('Invalid Facebook URL')
+      .required('Facebook URL is required'),
+    twitter: Yup.string()
+      .url('Invalid Twitter URL')
+      .required('Twitter URL is required'),
   }),
   jobType: Yup.string().required('Job Type is required'),
 });

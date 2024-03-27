@@ -10,9 +10,7 @@ const FormilNestedInput = ({ label, ...props }: FormikFieldProp) => {
     <div>
       <label htmlFor={props.name}>{label}</label>
       <Input
-        {...field}
-        id={props.name}
-        type='text'
+        id={`props.name${Math.random()}`}
         placeholder={`Enter ${name} URL`}
         onChange={(e) => helpers.setValue(e.target.value)}
       />

@@ -1,15 +1,14 @@
 import { useField } from 'formik';
 import React from 'react';
 import { MultiSelectDropDown } from './MultiSelect';
-import { FormikFieldProp } from './types';
+import { FormikFieldProp, Option } from './types';
 
 interface FormikMultiSelectProp extends FormikFieldProp {
-  options: any[];
+  options: Option[];
 }
 
 const FormikMultiSelect = ({ label, ...props }: FormikMultiSelectProp) => {
   const [field, meta, helpers] = useField(props);
-  console.log('value', field.value);
   return (
     <div className='my-2'>
       <label htmlFor={props.id || props.name} className='mb-1'>
