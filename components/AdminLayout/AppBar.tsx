@@ -21,10 +21,9 @@ const AppBar = () => {
   const handleMenuClick = async (name: string) => {
     try {
       if (name === 'Sign out') {
-        const res = await fetch('/api/remove-cookie', {
+        const res = await fetch('/api/logout', {
           method: 'POST',
         });
-        localStorage.removeItem('token');
         router.push('/login');
       }
     } catch (e) {
