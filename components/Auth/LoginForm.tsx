@@ -7,6 +7,9 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/lib/firebase/firebase';
+import { FirebaseError } from 'firebase/app';
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -15,6 +18,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     email: '',
     password: '',
   });
+  const [error, setError] = React.useState('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -22,15 +26,29 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     try {
       event.preventDefault();
       setIsLoading(true);
-      const res = await fetch('/api/login', {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+      await fetch('/api/login', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(token),
       });
-      const parsedRes = await res.json();
-      router.replace('/admin');
-      console.log({ parsedRes });
+
+      router.push('/admin');
+      console.log(user);
     } catch (error) {
-      console.log('Failed to login', error);
+      console.log('Failed to login:', error);
+      if (error instanceof FirebaseError) {
+        const firebaseError = error as FirebaseError;
+        setError(firebaseError.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -49,10 +67,8 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       <form onSubmit={onSubmit}>
         <div className='grid gap-2'>
           <div className='grid gap-1'>
-            <label className='sr-only' htmlFor='email'>
-              Email
-            </label>
-            <input
+            <Label>Email</Label>
+            <Input
               id='email'
               placeholder='name@example.com'
               type='email'
@@ -65,10 +81,8 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             />
           </div>
           <div className='grid gap-1'>
-            <label className='sr-only' htmlFor='password'>
-              Password
-            </label>
-            <input
+            <Label>Password</Label>
+            <Input
               id='password'
               type='password'
               disabled={isLoading}
@@ -76,6 +90,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
               onChange={handleChange}
             />
           </div>
+          <div className='my-4 text-red-500'>{error}</div>
           <button type='submit' disabled={isLoading}>
             Sign In
           </button>
