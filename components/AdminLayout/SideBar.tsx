@@ -13,12 +13,32 @@ import {
 import { usePathname } from 'next/navigation';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
-  { name: 'Users', href: 'admin/users', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Dashboard', href: '/admin', icon: HomeIcon, current: false },
+  { name: 'Users', href: '/admin/users', icon: UsersIcon, current: false },
+  {
+    name: 'Projects',
+    href: '/admin/projects',
+    icon: FolderIcon,
+    current: false,
+  },
+  {
+    name: 'Calendar',
+    href: '/admin/calendar',
+    icon: CalendarIcon,
+    current: false,
+  },
+  {
+    name: 'Documents',
+    href: '/admin/documents',
+    icon: DocumentDuplicateIcon,
+    current: false,
+  },
+  {
+    name: 'Reports',
+    href: '/admin/reports',
+    icon: ChartPieIcon,
+    current: false,
+  },
 ];
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },

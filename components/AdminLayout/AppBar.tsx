@@ -1,9 +1,11 @@
 'use client';
 import React from 'react';
 import { Fragment } from 'react';
+import Cookies from 'js-cookie';
 import { Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/navigation';
 
 const userNavigation = [
   { name: 'Your profile', href: '#' },
@@ -15,13 +17,24 @@ function classNames(...classes: string[]) {
 }
 
 const AppBar = () => {
+  const router = useRouter();
+  const handleMenuClick = async (name: string) => {
+    try {
+      if (name === 'Sign out') {
+        const res = await fetch('/api/remove-cookie', {
+          method: 'POST',
+        });
+        localStorage.removeItem('token');
+        router.push('/login');
+      }
+    } catch (e) {
+      console.log('error', e);
+    }
+  };
+
   return (
     <div className='sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4   bg-surface-800 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8'>
-      <button
-        type='button'
-        className='-m-2.5 p-2.5 text-gray-700 lg:hidden'
-        // onClick={() => setSidebarOpen(true)}
-      >
+      <button type='button' className='-m-2.5 p-2.5 text-gray-700 lg:hidden'>
         <span className='sr-only'>Open sidebar</span>
         <Bars3Icon className='h-6 w-6' aria-hidden='true' />
       </button>
@@ -47,7 +60,7 @@ const AppBar = () => {
           />
 
           {/* Profile dropdown */}
-          <Menu as='div' className='relative'>
+          <Menu as='div' className='relative '>
             <Menu.Button className='-m-1.5 flex items-center p-1.5'>
               <span className='sr-only'>Open user menu</span>
               <img
@@ -77,15 +90,15 @@ const AppBar = () => {
               leaveFrom='transform opacity-100 scale-100'
               leaveTo='transform opacity-0 scale-95'
             >
-              <Menu.Items className='absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md  py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none'>
+              <Menu.Items className='absolute right-0 z-10 mt-2.5 w-32 origin-top-right bg-surface-200 rounded-md  py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none'>
                 {userNavigation.map((item) => (
                   <Menu.Item key={item.name}>
                     {({ active }) => (
                       <a
-                        href={item.href}
+                        onClick={() => handleMenuClick(item.name)}
                         className={classNames(
                           active ? 'bg-gray-50' : '',
-                          'block px-3 py-1 text-sm leading-6 text-gray-900'
+                          'block px-3 cursor-pointer py-1 text-sm leading-6 text-gray-900 hover:bg-surface-100'
                         )}
                       >
                         {item.name}
