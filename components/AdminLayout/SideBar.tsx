@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
-  { name: 'Users', href: '#', icon: UsersIcon, current: false },
+  { name: 'Users', href: '/users', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
