@@ -11,6 +11,10 @@ import { useRouter } from 'next/navigation';
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginForm({ className, ...props }: LoginFormProps) {
+  const [formData, setFormData] = React.useState({
+    email: '',
+    password: '',
+  });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -18,10 +22,11 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     try {
       event.preventDefault();
       setIsLoading(true);
-
-      const res = await fetch('/api/login', { method: 'POST', body: null });
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
       const parsedRes = await res.json();
-
       router.replace('/admin');
       console.log({ parsedRes });
     } catch (error) {
@@ -31,21 +36,23 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     }
   }
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
   return (
-    <div
-      className={cn('grid gap-6', className)}
-      {...props}
-    >
+    <div className={cn('grid gap-6', className)} {...props}>
       <form onSubmit={onSubmit}>
         <div className='grid gap-2'>
           <div className='grid gap-1'>
-            <Label
-              className='sr-only'
-              htmlFor='email'
-            >
+            <label className='sr-only' htmlFor='email'>
               Email
-            </Label>
-            <Input
+            </label>
+            <input
               id='email'
               placeholder='name@example.com'
               type='email'
@@ -53,25 +60,25 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
               autoComplete='email'
               autoCorrect='off'
               disabled={isLoading}
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div className='grid gap-1'>
-            <Label
-              className='sr-only'
-              htmlFor='password'
-            >
+            <label className='sr-only' htmlFor='password'>
               Password
-            </Label>
-            <Input
+            </label>
+            <input
               id='password'
               type='password'
               disabled={isLoading}
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
-          <Button disabled={isLoading}>
-            {/* {isLoading && <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />} */}
+          <button type='submit' disabled={isLoading}>
             Sign In
-          </Button>
+          </button>
         </div>
       </form>
       <div className='relative'>
@@ -79,14 +86,12 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
           <span className='w-full border-t' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
+          <span className='bg-background px-2 text-muted-foreground'>
+            Or continue with
+          </span>
         </div>
       </div>
-      <Button
-        variant='outline'
-        type='button'
-        disabled={isLoading}
-      >
+      <Button variant='outline' type='button' disabled={isLoading}>
         {/* {isLoading ? (
           <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
         ) : (

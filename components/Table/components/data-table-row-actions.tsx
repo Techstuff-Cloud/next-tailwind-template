@@ -32,6 +32,11 @@ export function DataTableRowActions<TData>({
     deleteData(row.renderValue('_id'));
   };
 
+  const handleEdit = () => {
+    getById(row.renderValue('_id'));
+    handleDrawerOpen(row.renderValue('_id'));
+  };
+
   return (
     <>
       <DropdownMenu>
@@ -45,11 +50,7 @@ export function DataTableRowActions<TData>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-[160px]'>
-          <DropdownMenuItem
-            onClick={() => handleDrawerOpen(row.renderValue('_id'))}
-          >
-            Edit
-          </DropdownMenuItem>
+          <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             Delete
           </DropdownMenuItem>

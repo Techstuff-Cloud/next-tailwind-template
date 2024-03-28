@@ -1,10 +1,19 @@
 import axios, { AxiosError } from 'axios';
+import Cookies from 'js-cookie';
 
 const API_URL = 'http://localhost:3000';
 
-// from Cookies
-// const token = localStorage.getItem('token') || '';
-const token = '123';
+const getToken = () => {
+  if (typeof window !== 'undefined') {
+    const tokenFromCookie = Cookies.get('token');
+    if (tokenFromCookie) {
+      return tokenFromCookie;
+    }
+    return localStorage.getItem('token') || '';
+  } else {
+    return '';
+  }
+};
 
 const api = axios.create({
   baseURL: API_URL,
@@ -13,6 +22,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
+    const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

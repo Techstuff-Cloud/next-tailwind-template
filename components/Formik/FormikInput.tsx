@@ -11,7 +11,7 @@ const FormikInput = ({ label, ...props }: FormikFieldProp) => {
       <label htmlFor={props.name} className='mb-1'>
         {label}
       </label>
-      <Input {...field} onChange={(e) => helpers.setValue(e.target.value)} />
+      <Input {...field} {...props} />
       {meta.touched && meta.error ? (
         <div className='error text-red-500 mt-2'>{meta.error}</div>
       ) : null}

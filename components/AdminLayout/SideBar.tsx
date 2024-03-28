@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 import {
@@ -9,10 +10,11 @@ import {
   HomeIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline';
+import { usePathname } from 'next/navigation';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
+  { name: 'Dashboard', href: '#', icon: HomeIcon, current: false },
+  { name: 'Users', href: '#', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
@@ -29,6 +31,7 @@ function classNames(...classes: string[]) {
 }
 
 const SideBar = () => {
+  const pathName = usePathname();
   return (
     <div className='hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
       {/* Sidebar component, swap this element with another sidebar if you like */}
@@ -49,7 +52,7 @@ const SideBar = () => {
                     <a
                       href={item.href}
                       className={classNames(
-                        item.current
+                        pathName.includes(item.name.toLowerCase())
                           ? 'bg-indigo-700 text-white'
                           : 'text-indigo-200 hover:text-white hover:bg-indigo-700',
                         'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -57,7 +60,7 @@ const SideBar = () => {
                     >
                       <item.icon
                         className={classNames(
-                          item.current
+                          pathName.includes(item.name.toLowerCase())
                             ? 'text-white'
                             : 'text-indigo-200 group-hover:text-white',
                           'h-6 w-6 shrink-0'
