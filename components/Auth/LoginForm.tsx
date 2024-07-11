@@ -7,9 +7,6 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/lib/firebase/firebase';
-import { FirebaseError } from 'firebase/app';
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -26,29 +23,22 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     try {
       event.preventDefault();
       setIsLoading(true);
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
 
-      const user = userCredential.user;
-      const token = await user.getIdToken();
-      await fetch('/api/login', {
+      const res = await fetch('/api/login', {
         method: 'POST',
-        body: JSON.stringify(token),
+        body: JSON.stringify(formData),
       });
 
-      router.push('/admin');
-      console.log(user);
+      const data = await res.json();
+
+      if (data.success) {
+        router.push('/');
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
       console.log('Failed to login:', error);
-      if (error instanceof FirebaseError) {
-        const firebaseError = error as FirebaseError;
-        setError(firebaseError.message);
-      } else {
-        setError('An unknown error occurred');
-      }
+      setError('An unknown error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -63,7 +53,10 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
   };
 
   return (
-    <div className={cn('grid gap-6', className)} {...props}>
+    <div
+      className={cn('grid gap-6', className)}
+      {...props}
+    >
       <form onSubmit={onSubmit}>
         <div className='grid gap-2'>
           <div className='grid gap-1'>
@@ -91,7 +84,10 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             />
           </div>
           <div className='my-4 text-red-500'>{error}</div>
-          <button type='submit' disabled={isLoading}>
+          <button
+            type='submit'
+            disabled={isLoading}
+          >
             Sign In
           </button>
         </div>
@@ -101,12 +97,14 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
           <span className='w-full border-t' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>
-            Or continue with
-          </span>
+          <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
         </div>
       </div>
-      <Button variant='outline' type='button' disabled={isLoading}>
+      <Button
+        variant='outline'
+        type='button'
+        disabled={isLoading}
+      >
         {/* {isLoading ? (
           <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
         ) : (
