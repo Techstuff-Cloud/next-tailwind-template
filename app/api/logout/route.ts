@@ -1,7 +1,15 @@
-import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request, res: Response) {
-  cookies().delete('token');
+  const response = NextResponse.json({ message: 'Logged-out successfully' });
 
-  return new Response(JSON.stringify({ message: 'Logged-out successfully' }));
+  response.cookies.delete({
+    name: 'token',
+    path: '/',
+    maxAge: 0,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  return response;
 }
