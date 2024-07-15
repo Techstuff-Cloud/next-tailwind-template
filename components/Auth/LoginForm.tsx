@@ -32,7 +32,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       const data = await res.json();
 
       if (data.success) {
-        router.push('/');
+        router.push('/admin');
       } else {
         setError(data.message);
       }
