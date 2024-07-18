@@ -6,6 +6,7 @@ import './globals.css';
 import { UserContextProvider, UserWrapper } from '@/lib/stores/users';
 import { cookies } from 'next/headers';
 import { decodeJwt } from 'jose';
+import { initialUserState, UserState } from '@/lib/stores/users/Context';
 
 const orgs = [
   {
@@ -33,7 +34,7 @@ const fetchOrganizations = async (userId: string) => {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const token = cookies().get('token')?.value;
   const orgs = (await fetchOrganizations('1')) as any[];
-  const claims = (token ? decodeJwt(token)?.claims : []) as string[];
+  const userInfo = (token ? decodeJwt(token) : initialUserState) as UserState;
 
   return (
     <SettingContext>
@@ -42,7 +43,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <UserWrapper
             token={token}
             origanizations={orgs}
-            permissions={claims}
+            claims={userInfo.claims}
+            roles={userInfo.roles}
             activeSubscription={''}
           />
           {children}

@@ -4,9 +4,10 @@ import { createContext, useContext, useReducer, type Dispatch } from 'react';
 
 export interface UserState {
   token: string;
-  permissions: any[];
+  claims: any[];
   origanizations: any[];
   activeSubscription: string;
+  roles: string[];
 }
 
 type UserAction =
@@ -15,8 +16,8 @@ type UserAction =
       token: string;
     }
   | {
-      type: 'SET_PERMISSIONS';
-      permissions: any[];
+      type: 'SET_CLAIMS';
+      claims: any[];
     }
   | {
       type: 'SET_ORIGANIZATIONS';
@@ -25,13 +26,18 @@ type UserAction =
   | {
       type: 'SET_ACTIVE_SUBSCRIPTION';
       activeSubscription: string;
+    }
+  | {
+      type: 'SET_ROLES';
+      roles: string[];
     };
 
-const initialState: UserState = {
+export const initialUserState: UserState = {
   token: '',
-  permissions: [],
+  claims: [],
   origanizations: [],
   activeSubscription: '',
+  roles: [],
 };
 
 const userReducer = (state: UserState, action: UserAction) => {
@@ -41,10 +47,10 @@ const userReducer = (state: UserState, action: UserAction) => {
         ...state,
         token: action.token,
       };
-    case 'SET_PERMISSIONS':
+    case 'SET_CLAIMS':
       return {
         ...state,
-        permissions: action.permissions,
+        claims: action.claims,
       };
     case 'SET_ORIGANIZATIONS':
       return {
@@ -56,6 +62,11 @@ const userReducer = (state: UserState, action: UserAction) => {
         ...state,
         activeSubscription: action.activeSubscription,
       };
+    case 'SET_ROLES':
+      return {
+        ...state,
+        roles: action.roles,
+      };
     default:
       return state;
   }
@@ -64,7 +75,7 @@ const userReducer = (state: UserState, action: UserAction) => {
 const UsersContext = createContext<{ userState: UserState; userDispatch: Dispatch<UserAction> } | undefined>(undefined);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userState, userDispatch] = useReducer(userReducer, initialState);
+  const [userState, userDispatch] = useReducer(userReducer, initialUserState);
 
   return <UsersContext.Provider value={{ userState, userDispatch }}>{children}</UsersContext.Provider>;
 };
