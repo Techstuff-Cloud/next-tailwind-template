@@ -5,20 +5,13 @@ import * as React from 'react';
 import './globals.css';
 import { UserContextProvider, UserWrapper } from '@/lib/stores/users';
 import { cookies } from 'next/headers';
+import { decodeJwt } from 'jose';
 
 const orgs = [
   {
     userId: '1',
     name: 'Techstuff',
     orgId: 'tech_01',
-  },
-];
-
-const permissions = [
-  {
-    userId: '1',
-    name: 'perm-1',
-    permissionId: 'perm_01',
   },
 ];
 
@@ -37,25 +30,10 @@ const fetchOrganizations = async (userId: string) => {
   }
 };
 
-const fetchPermissions = async (userId: string) => {
-  try {
-    // TODO: Use external API here to fetch permissions
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const userPermissions = permissions.filter((perm) => perm.userId === userId);
-        resolve(userPermissions);
-      }, 1000);
-    });
-  } catch (error) {
-    console.log('Error fetching permissions:', error);
-    // throw error;
-  }
-};
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const token = cookies().get('token')?.value;
   const orgs = (await fetchOrganizations('1')) as any[];
-  const permissions = (await fetchPermissions('1')) as any[];
+  const claims = (token ? decodeJwt(token)?.claims : []) as string[];
 
   return (
     <SettingContext>
@@ -64,7 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <UserWrapper
             token={token}
             origanizations={orgs}
-            permissions={permissions}
+            permissions={claims}
             activeSubscription={''}
           />
           {children}
