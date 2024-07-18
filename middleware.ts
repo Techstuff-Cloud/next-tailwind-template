@@ -1,11 +1,8 @@
 import { decodeJwt } from 'jose';
 import type { NextRequest } from 'next/server';
+import { PERMISSIONS } from './constants/permissions';
 
 const protectedRoutes = ['/admin', '/teacher', '/principle', '/management'];
-
-const perms = {
-  '/admin/setting': ['admin.setting.edit', 'admin.setting.view'],
-};
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -32,6 +29,15 @@ export function middleware(request: NextRequest) {
   if (isProtectedRoute) {
     if (!token) {
       return Response.redirect(new URL('/login', request.url));
+    }
+
+    if (PERMISSIONS[pathname]) {
+      const viewPermissionKey = PERMISSIONS[pathname].find((perm) => perm.endsWith('.view'));
+
+      // check if user has view permission
+      if (!viewPermissionKey || !userInfo?.claims?.includes(viewPermissionKey)) {
+        return Response.redirect(new URL('/not-allowed', request.url));
+      }
     }
   }
 }
