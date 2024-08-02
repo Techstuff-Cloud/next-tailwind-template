@@ -7,6 +7,7 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
+import { useUserContext } from '@/lib/stores/users';
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -18,6 +19,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
   const [error, setError] = React.useState('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
+  const { userDispatch } = useUserContext();
 
   async function onSubmit(event: React.SyntheticEvent) {
     try {
@@ -32,6 +34,17 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       const data = await res.json();
 
       if (data.success) {
+        const userInfoRes = await fetch('/api/user');
+        const parsedUserInfo = await userInfoRes.json();
+
+        if (!parsedUserInfo?.userInfo) {
+          throw new Error('User info not found');
+        }
+
+        userDispatch({ type: 'SET_CLAIMS', claims: parsedUserInfo.userInfo?.claims });
+        userDispatch({ type: 'SET_ROLES', roles: parsedUserInfo.userInfo?.roles });
+        userDispatch({ type: 'SET_ACTIVE_SUBSCRIPTION', activeSubscription: parsedUserInfo.userInfo?.activePlan });
+
         router.push('/');
       } else {
         setError(data.message);
