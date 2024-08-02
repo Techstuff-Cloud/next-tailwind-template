@@ -1,49 +1,11 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import React from 'react';
+import ManagementNavbar from './navbar';
 
 export default function ManagementLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div>ManagementLayout</div>
-
-      <nav>
-        <Link href={'/management/principle'}>
-          <Button
-            size='sm'
-            variant='link'
-          >
-            View Principles
-          </Button>
-        </Link>
-
-        <Link href={'/management/student'}>
-          <Button
-            size='sm'
-            variant='link'
-          >
-            View Students
-          </Button>
-        </Link>
-
-        <Link href={'/management/class'}>
-          <Button
-            size='sm'
-            variant='link'
-          >
-            View Class
-          </Button>
-        </Link>
-
-        <Link href={'/management/setting'}>
-          <Button
-            size='sm'
-            variant='link'
-          >
-            View Setting
-          </Button>
-        </Link>
-      </nav>
+      <ManagementNavbar />
 
       {children}
     </>
