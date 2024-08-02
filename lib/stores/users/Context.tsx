@@ -5,7 +5,7 @@ import { createContext, useContext, useReducer, type Dispatch } from 'react';
 export interface UserState {
   token: string;
   claims: any[];
-  origanizations: any[];
+  organizations: any[];
   activeSubscription: string;
   roles: string[];
 }
@@ -20,8 +20,8 @@ type UserAction =
       claims: any[];
     }
   | {
-      type: 'SET_ORIGANIZATIONS';
-      origanizations: any[];
+      type: 'SET_ORGANIZATIONS';
+      organizations: any[];
     }
   | {
       type: 'SET_ACTIVE_SUBSCRIPTION';
@@ -35,7 +35,7 @@ type UserAction =
 export const initialUserState: UserState = {
   token: '',
   claims: [],
-  origanizations: [],
+  organizations: [],
   activeSubscription: '',
   roles: [],
 };
@@ -52,10 +52,10 @@ const userReducer = (state: UserState, action: UserAction) => {
         ...state,
         claims: action.claims,
       };
-    case 'SET_ORIGANIZATIONS':
+    case 'SET_ORGANIZATIONS':
       return {
         ...state,
-        origanizations: action.origanizations,
+        organizations: action.organizations,
       };
     case 'SET_ACTIVE_SUBSCRIPTION':
       return {

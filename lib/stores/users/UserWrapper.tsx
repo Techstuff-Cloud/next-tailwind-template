@@ -6,7 +6,7 @@ import { UserState, useUserContext } from './Context';
 interface UserWrapperProps extends Partial<UserState> {}
 
 export const UserWrapper = (props: UserWrapperProps) => {
-  const { activeSubscription, origanizations, claims, token, roles } = props;
+  const { activeSubscription, organizations, claims, token, roles } = props;
   const { userDispatch } = useUserContext();
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export const UserWrapper = (props: UserWrapperProps) => {
   }, [activeSubscription, userDispatch]);
 
   useEffect(() => {
-    userDispatch({ type: 'SET_ORIGANIZATIONS', origanizations: origanizations || [] });
-  }, [origanizations, userDispatch]);
+    userDispatch({ type: 'SET_ORGANIZATIONS', organizations: organizations || [] });
+  }, [organizations, userDispatch]);
 
   useEffect(() => {
     userDispatch({ type: 'SET_CLAIMS', claims: claims || [] });

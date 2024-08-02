@@ -42,7 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <WrapperComponent>
           <UserWrapper
             token={token}
-            origanizations={orgs}
+            organizations={orgs}
             claims={userInfo.claims}
             roles={userInfo.roles}
             activeSubscription={''}
