@@ -25,6 +25,24 @@ export default function ManagementLayout({ children }: { children: React.ReactNo
             View Students
           </Button>
         </Link>
+
+        <Link href={'/management/class'}>
+          <Button
+            size='sm'
+            variant='link'
+          >
+            View Class
+          </Button>
+        </Link>
+
+        <Link href={'/management/setting'}>
+          <Button
+            size='sm'
+            variant='link'
+          >
+            View Setting
+          </Button>
+        </Link>
       </nav>
 
       {children}
