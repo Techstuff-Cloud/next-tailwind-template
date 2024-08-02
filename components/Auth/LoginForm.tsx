@@ -45,7 +45,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
         userDispatch({ type: 'SET_ROLES', roles: parsedUserInfo.userInfo?.roles });
         userDispatch({ type: 'SET_ACTIVE_SUBSCRIPTION', activeSubscription: parsedUserInfo.userInfo?.activePlan });
 
-        router.push('/');
+        router.replace('/');
       } else {
         setError(data.message);
       }

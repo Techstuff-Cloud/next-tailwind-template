@@ -18,6 +18,7 @@ const SelectRole = () => {
             <Link
               href={ROLES[role]?.path}
               key={role}
+              replace
             >
               <Card>
                 <CardContent className='pt-6'>{ROLES[role]?.label}</CardContent>
