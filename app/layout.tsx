@@ -34,7 +34,7 @@ const fetchOrganizations = async (userId: string) => {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const token = cookies().get('token')?.value;
   const orgs = (await fetchOrganizations('1')) as any[];
-  const userInfo = (token ? decodeJwt(token) : initialUserState) as UserState;
+  const userInfo = (token ? decodeJwt(token) : {}) as UserState;
 
   return (
     <SettingContext>

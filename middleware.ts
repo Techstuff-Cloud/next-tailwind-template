@@ -2,7 +2,7 @@ import { decodeJwt } from 'jose';
 import type { NextRequest } from 'next/server';
 import { PERMISSIONS } from './constants/permissions';
 
-const protectedRoutes = ['/admin', '/teacher', '/principle', '/management'];
+const protectedRoutes = ['/admin', '/teacher', '/principle', '/management', '/select-role'];
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
