@@ -1,25 +1,48 @@
 'use client';
 
-import Tabs from '@/components/UI/Tabs/Tabs';
-import React from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useState } from 'react';
 import { studentLayoutTabsData } from '../constants';
-import { Tab } from '@/components/UI/Tabs';
 import { StudentLayoutTabItem } from '../types';
 import { useRouter } from 'next/navigation';
 
 const StudentLayoutTabs = () => {
+  const [activeTab, setActiveTab] = useState<string | undefined>(undefined);
+
+  // const handleTabClick = (index: number, tab: Tab<T>) => {
+
+  //   onTabChange?.(tab);
+  // };
   const router = useRouter();
 
-  const handleTabChange = (tab: Tab<StudentLayoutTabItem>) => {
-    router.push(tab.href);
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    router.push(value);
   };
 
   return (
     <div className='p-6'>
-      <Tabs<StudentLayoutTabItem>
+      {/* <Tabs<StudentLayoutTabItem>
         tabs={studentLayoutTabsData}
         onTabChange={handleTabChange}
-      />
+      /> */}
+
+      <Tabs
+        className='w-[400px]'
+        onValueChange={handleTabChange}
+        value={activeTab}
+      >
+        <TabsList className='grid w-full grid-cols-2'>
+          {studentLayoutTabsData.map((tab) => (
+            <TabsTrigger
+              key={tab.label}
+              value={tab.href}
+            >
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
     </div>
   );
 };

@@ -1,15 +1,17 @@
-import { StudentLayoutTabs } from '@/modules/student';
+import { StudentLayout, StudentLayoutTabs } from '@/modules/student';
 import React from 'react';
 
-const StudentLayout = ({ children }: { children: React.ReactNode }) => {
+const StudentAppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <div>StudentLayout</div>
-      <StudentLayoutTabs />
-      {children}
+      <StudentLayout>
+        <div>StudentLayout</div>
+        <StudentLayoutTabs />
+        {children}
+      </StudentLayout>
     </>
   );
 };
 
-StudentLayout.displayName = 'StudentLayout';
-export default StudentLayout;
+StudentAppLayout.displayName = 'StudentAppLayout';
+export default StudentAppLayout;

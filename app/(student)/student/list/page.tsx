@@ -7,9 +7,9 @@ const StudentListPage = async ({ searchParams }: { searchParams: { [key: string]
 
   return (
     <>
-      <div>StudentListPage</div>
-      <h1 className='mb-3'>Pokemon</h1>
-      <p>Count: {pokemons.count}</p>
+      <div className='text-gray-900'>StudentListPage</div>
+      <h1 className='mb-3 text-gray-900'>Pokemon</h1>
+      <p className='text-gray-900'>Count: {pokemons.count}</p>
       <StudentList
         students={pokemons.results}
         nextCursor={pokemons.next}

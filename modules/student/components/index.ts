@@ -1,4 +1,5 @@
+import StudentLayout from './StudentLayout';
 import StudentLayoutTabs from './StudentLayoutTabs';
 import StudentList from './StudentList';
 
-export { StudentLayoutTabs, StudentList };
+export { StudentLayout, StudentLayoutTabs, StudentList };
