@@ -1,7 +1,4 @@
-import { Tab } from '@/components/UI/Tabs';
-import { StudentLayoutTabItem } from '../types';
-
-export const studentLayoutTabsData: Tab<StudentLayoutTabItem>[] = [
+export const studentLayoutTabsData = [
   {
     label: 'View List',
     content: 'This is the content for Tab 1.',
