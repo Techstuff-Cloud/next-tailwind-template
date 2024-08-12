@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { navigationLinks } from '@/constants';
+import { navigationLinks } from '@/lib/constants';
 
 export const SideNavbarComponent = () => {
   return (
@@ -12,7 +12,10 @@ export const SideNavbarComponent = () => {
 
         {/*  shadcn components */}
         {navigationLinks.map((link, index) => (
-          <Link key={index} href={link.href}>
+          <Link
+            key={index}
+            href={link.href}
+          >
             <p className='text-xl text-black dark:text-white hover:text-muted-foreground dark:hover:text-black'>
               {link.text}
             </p>

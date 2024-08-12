@@ -1,7 +1,7 @@
+import { FilterProp, SortProp } from '@/lib/types';
+import { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import api from '../axiosInterceptor';
-import { ColumnFiltersState, SortingState } from '@tanstack/react-table';
-import { FilterProp, SortProp } from '@/constants/types/Table';
 
 interface ResourcesState<T> {
   loading: boolean;
@@ -39,7 +39,7 @@ const useResources = <T extends unknown[]>(): ResourcesState<T> => {
   };
 };
 
-export const useDBOperations = <T,>(endPoint: string) => {
+export const useDBOperations = <T>(endPoint: string) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(2);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -69,15 +69,10 @@ export const useDBOperations = <T,>(endPoint: string) => {
     }
   };
 
-  const fetchDataPaginated = async (
-    pageNumber: number,
-    rowsPerPage: number
-  ) => {
+  const fetchDataPaginated = async (pageNumber: number, rowsPerPage: number) => {
     try {
       toggleLoader();
-      const response = await api.get<T[]>(
-        `/${endPoint}?page=${pageNumber}&pageSize=${rowsPerPage}`
-      );
+      const response = await api.get<T[]>(`/${endPoint}?page=${pageNumber}&pageSize=${rowsPerPage}`);
       handleDataChange(response.data);
     } catch (error) {
       console.error('Error while fetching data:', error);

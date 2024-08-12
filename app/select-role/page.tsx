@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
-import { ROLES } from '@/constants/roles';
+import { ROLES } from '@/lib/constants/roles';
 import { useUserContext } from '@/lib/stores/users';
 import Link from 'next/link';
 

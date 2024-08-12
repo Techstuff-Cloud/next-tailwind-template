@@ -7,7 +7,7 @@ import { DataTableFacetedFilter } from './data-table-faceted-filter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { DataTableViewOptions } from './data-table-view-options';
-import { Filter } from '@/constants/types/Table';
+import { Filter } from '@/lib/types';
 import { Dispatch, SetStateAction } from 'react';
 
 interface DataTableToolbarProps<TData> {
@@ -17,12 +17,7 @@ interface DataTableToolbarProps<TData> {
   setOpenDrawer: Dispatch<SetStateAction<boolean>>;
 }
 
-export function DataTableToolbar<TData>({
-  table,
-  filters,
-  fieldSearch,
-  setOpenDrawer,
-}: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table, filters, fieldSearch, setOpenDrawer }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const handleFilterChange = debounce((value) => {

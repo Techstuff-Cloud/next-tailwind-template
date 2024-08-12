@@ -13,25 +13,13 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useDBOperations } from '@/lib/hooks/useDBOperations';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
-import {
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@radix-ui/react-select';
+import { SelectTrigger, SelectValue, SelectContent, SelectItem } from '@radix-ui/react-select';
 import { ColumnDef } from '@tanstack/react-table';
 import { Formik, Form } from 'formik';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/components/ui/drawer';
-import { Filter } from '@/constants/types/Table';
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
+import { Filter } from '@/lib/types';
 
 const options = [
   { value: 'Option 1', label: 'Option 1' },
@@ -59,13 +47,8 @@ const UserPage = () => {
       id: 'select',
       header: ({ table }) => (
         <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && 'indeterminate')
-          }
-          onCheckedChange={(value: any) =>
-            table.toggleAllPageRowsSelected(!!value)
-          }
+          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+          onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
           aria-label='Select all'
           className='translate-y-[2px]'
         />
@@ -84,7 +67,10 @@ const UserPage = () => {
     {
       accessorKey: '_id',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='ID' />
+        <DataTableColumnHeader
+          column={column}
+          title='ID'
+        />
       ),
       cell: ({ row }) => <div className='w-[80px]'>{row.getValue('_id')}</div>,
       enableSorting: false,
@@ -93,14 +79,15 @@ const UserPage = () => {
     {
       accessorKey: 'firstName',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='First Name' />
+        <DataTableColumnHeader
+          column={column}
+          title='First Name'
+        />
       ),
       cell: ({ row }) => {
         return (
           <div className='flex space-x-2'>
-            <span className='max-w-[500px] truncate font-medium'>
-              {row.getValue('firstName')}
-            </span>
+            <span className='max-w-[500px] truncate font-medium'>{row.getValue('firstName')}</span>
           </div>
         );
       },
@@ -109,14 +96,15 @@ const UserPage = () => {
     {
       accessorKey: 'lastName',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='Last Name' />
+        <DataTableColumnHeader
+          column={column}
+          title='Last Name'
+        />
       ),
       cell: ({ row }) => {
         return (
           <div className='flex space-x-2'>
-            <span className='max-w-[500px] truncate font-medium'>
-              {row.getValue('lastName')}
-            </span>
+            <span className='max-w-[500px] truncate font-medium'>{row.getValue('lastName')}</span>
           </div>
         );
       },
@@ -125,14 +113,15 @@ const UserPage = () => {
     {
       accessorKey: 'email',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='Email' />
+        <DataTableColumnHeader
+          column={column}
+          title='Email'
+        />
       ),
       cell: ({ row }) => {
         return (
           <div className='flex space-x-2'>
-            <span className='max-w-[500px] truncate font-medium'>
-              {row.getValue('email')}
-            </span>
+            <span className='max-w-[500px] truncate font-medium'>{row.getValue('email')}</span>
           </div>
         );
       },
@@ -141,14 +130,15 @@ const UserPage = () => {
     {
       accessorKey: 'mobile',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='Mobile' />
+        <DataTableColumnHeader
+          column={column}
+          title='Mobile'
+        />
       ),
       cell: ({ row }) => {
         return (
           <div className='flex space-x-2'>
-            <span className='max-w-[500px] truncate font-medium'>
-              {row.getValue('mobile')}
-            </span>
+            <span className='max-w-[500px] truncate font-medium'>{row.getValue('mobile')}</span>
           </div>
         );
       },
@@ -197,7 +187,11 @@ const UserPage = () => {
         />
       </div>
 
-      <Drawer direction='right' open={openDrawer} onOpenChange={setOpenDrawer}>
+      <Drawer
+        direction='right'
+        open={openDrawer}
+        onOpenChange={setOpenDrawer}
+      >
         <ScrollArea>
           <DrawerContent className='h-screen top-0 right-0 left-auto mt-0 w-[500px] rounded-none'>
             <DrawerHeader className='text-left'>
@@ -219,8 +213,14 @@ const UserPage = () => {
                       options={options}
                     />
                   </div>
-                  <FormikInput label='Name' name='userName' />
-                  <FormikTextArea label='textArea' name='textArea' />
+                  <FormikInput
+                    label='Name'
+                    name='userName'
+                  />
+                  <FormikTextArea
+                    label='textArea'
+                    name='textArea'
+                  />
                   <FormilNestedInput
                     label='Social Media Facebook'
                     name='social.facebook'
@@ -229,7 +229,10 @@ const UserPage = () => {
                     label='Social Media Twitter'
                     name='social.twitter'
                   />
-                  <FormikSelect label='Job Type' name='jobType'>
+                  <FormikSelect
+                    label='Job Type'
+                    name='jobType'
+                  >
                     <SelectTrigger className='w-full'>
                       <SelectValue placeholder='Theme' />
                     </SelectTrigger>

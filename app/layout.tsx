@@ -7,6 +7,12 @@ import { UserContextProvider, UserWrapper } from '@/lib/stores/users';
 import { cookies } from 'next/headers';
 import { decodeJwt } from 'jose';
 import { initialUserState, UserState } from '@/lib/stores/users/Context';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Next.JS Tailwind Template',
+  description: 'Next.JS Tailwind Template',
+};
 
 const orgs = [
   {

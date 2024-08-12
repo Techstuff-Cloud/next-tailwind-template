@@ -1,20 +1,10 @@
 import * as React from 'react';
 import { Option } from './types';
 import { Check, ChevronsUpDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from '@/components/ui/command';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 type MultiSelectProp = {
   value: any[];
@@ -23,12 +13,7 @@ type MultiSelectProp = {
   onChange: (option: string[]) => void;
 };
 
-export function MultiSelectDropDown({
-  name,
-  value,
-  options,
-  onChange,
-}: MultiSelectProp) {
+export function MultiSelectDropDown({ name, value, options, onChange }: MultiSelectProp) {
   const [open, setOpen] = React.useState(false);
   const [selectedValues, setSelectedValues] = React.useState<string[]>(value);
 
@@ -43,13 +28,17 @@ export function MultiSelectDropDown({
   };
 
   const truncatedSelectedValues =
-    selectedValues.length > 3
-      ? selectedValues.slice(0, 3).join(', ') + '...'
-      : selectedValues.join(', ');
+    selectedValues.length > 3 ? selectedValues.slice(0, 3).join(', ') + '...' : selectedValues.join(', ');
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild className='w-full'>
+    <Popover
+      open={open}
+      onOpenChange={setOpen}
+    >
+      <PopoverTrigger
+        asChild
+        className='w-full'
+      >
         <Button
           variant='outline'
           role='combobox'
@@ -63,7 +52,10 @@ export function MultiSelectDropDown({
       </PopoverTrigger>
       <PopoverContent className='!w-full !p-0'>
         <Command>
-          <CommandInput name={name} placeholder='Search framework...' />
+          <CommandInput
+            name={name}
+            placeholder='Search framework...'
+          />
           <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup className='!w-full'>
             {options.map((option: Option) => (
@@ -74,12 +66,7 @@ export function MultiSelectDropDown({
                 onSelect={() => handleToggleOption(option.value)}
               >
                 <Check
-                  className={cn(
-                    'mr-2 h-4 w-4',
-                    selectedValues.includes(option.value)
-                      ? 'opacity-100'
-                      : 'opacity-0'
-                  )}
+                  className={cn('mr-2 h-4 w-4', selectedValues.includes(option.value) ? 'opacity-100' : 'opacity-0')}
                 />
                 {option.label}
               </CommandItem>

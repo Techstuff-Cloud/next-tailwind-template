@@ -1,6 +1,6 @@
 import { decodeJwt } from 'jose';
 import type { NextRequest } from 'next/server';
-import { PERMISSIONS } from './constants/permissions';
+import { PERMISSIONS } from './lib/constants/permissions';
 
 const protectedRoutes = ['/admin', '/teacher', '/principle', '/management', '/select-role'];
 
