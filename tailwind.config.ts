@@ -1,14 +1,11 @@
-import type { Config } from 'tailwindcss';
+import { skeleton } from '@skeletonlabs/tw-plugin';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
+import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
-import { skeleton } from '@skeletonlabs/tw-plugin';
-import {
-  myCustomThemeFour,
-  myCustomThemeOne,
-  myCustomThemeThree,
-  myCustomThemeTwo,
-} from './themes/base';
+import { myCustomThemeFour, myCustomThemeOne, myCustomThemeThree, myCustomThemeTwo } from './themes/base';
+import { muiTheme1 } from './themes/theme1';
+import { muiTheme2 } from './themes/theme2';
 
 const config = {
   darkMode: 'class',
@@ -95,13 +92,7 @@ const config = {
     },
   },
   plugins: [
-    function ({
-      addUtilities,
-      e,
-    }: {
-      addUtilities: any;
-      e: (className: string) => string;
-    }) {
+    function ({ addUtilities, e }: { addUtilities: any; e: (className: string) => string }) {
       const newUtilities = {
         [`button.${e('bg-tertiary')}:hover`]: {
           backgroundColor: `rgb(var(--color-tertiary-400)) !important`,
@@ -124,12 +115,7 @@ const config = {
     skeleton({
       themes: {
         preset: ['skeleton'],
-        custom: [
-          myCustomThemeOne,
-          myCustomThemeTwo,
-          myCustomThemeThree,
-          myCustomThemeFour,
-        ],
+        custom: [myCustomThemeOne, myCustomThemeTwo, myCustomThemeThree, myCustomThemeFour, muiTheme1, muiTheme2],
       },
     }),
   ],
