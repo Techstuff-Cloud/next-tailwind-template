@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MANAGEMENT_STAFF_PERMISSIONS } from '@/constants/permissions';
+import { MANAGEMENT_STAFF_PERMISSIONS } from '@/lib/constants/permissions';
 import { usePermissions } from '@/lib/hooks/usePermissions';
 import Link from '@/components/Link';
 

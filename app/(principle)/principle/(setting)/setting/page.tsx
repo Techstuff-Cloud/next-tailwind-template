@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { PRINCIPLE_PERMISSIONS } from '@/constants/permissions';
+import { PRINCIPLE_PERMISSIONS } from '@/lib/constants/permissions';
 import { usePermissions } from '@/lib/hooks/usePermissions';
 import React from 'react';
 
