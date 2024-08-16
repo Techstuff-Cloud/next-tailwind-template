@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
+  "cSpell.words": ["skeletonlabs"]
+}
