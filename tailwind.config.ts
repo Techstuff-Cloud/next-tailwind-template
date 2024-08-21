@@ -6,6 +6,7 @@ import animate from 'tailwindcss-animate';
 import { myCustomThemeFour, myCustomThemeOne, myCustomThemeThree, myCustomThemeTwo } from './themes/base';
 import { muiTheme1 } from './themes/theme1';
 import { muiTheme2 } from './themes/theme2';
+import { omkalaTheme } from './themes/omkala';
 
 const config = {
   darkMode: 'class',
@@ -89,6 +90,9 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [
@@ -115,7 +119,7 @@ const config = {
     skeleton({
       themes: {
         preset: ['skeleton'],
-        custom: [myCustomThemeOne, myCustomThemeTwo, myCustomThemeThree, myCustomThemeFour, muiTheme1, muiTheme2],
+        custom: [myCustomThemeOne, myCustomThemeTwo, myCustomThemeThree, myCustomThemeFour, muiTheme1, muiTheme2,omkalaTheme],
       },
     }),
   ],

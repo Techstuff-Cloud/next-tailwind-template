@@ -15,18 +15,18 @@ interface ThemeContextProps {
 }
 
 const ThemeContext = React.createContext<ThemeContextProps>({
-  mode: 'dark',
+  mode: 'light',
   theme: '',
   toggleColorMode: () => {},
   setTheme: () => {},
 });
 
 export function SettingContext({ children }: SettingContextProps) {
-  const [mode, setMode] = React.useState('dark');
-  const [theme, setTheme] = React.useState('my-custom-theme-one');
+  const [mode, setMode] = React.useState('light');
+  const [theme, setTheme] = React.useState('omkala-theme');
 
   const toggleColorMode = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setMode((prevMode) => (prevMode === 'light' ? 'light' : 'light'));
   };
 
   return (
