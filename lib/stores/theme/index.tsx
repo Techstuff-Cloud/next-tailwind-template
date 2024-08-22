@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState } from "react";
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -14,21 +14,25 @@ interface ThemeContextProps {
 }
 
 export const ThemeContext = createContext<ThemeContextProps>({
-  mode: 'dark',
-  theme: '',
+  mode: "dark",
+  theme: "",
   toggleColorMode: () => {},
   setTheme: () => {},
 });
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [mode, setMode] = useState('dark');
-  const [theme, setTheme] = useState('my-custom-theme-one');
+  const [mode, setMode] = useState("dark");
+  const [theme, setTheme] = useState("my-custom-theme-one");
 
   const toggleColorMode = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
-  return <ThemeContext.Provider value={{ mode, theme, toggleColorMode, setTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ mode, theme, toggleColorMode, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
 
 export default ThemeProvider;

@@ -6,8 +6,8 @@ import {
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
-} from '@/components/ui/menubar';
-import Page from '@/components/ComponentWrapper';
+} from "@/components/ui/menubar";
+import Page from "@/components/ComponentWrapper";
 
 const MenubarComponent = () => {
   return (

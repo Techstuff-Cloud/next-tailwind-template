@@ -1,6 +1,6 @@
-import { FilterProp, SortProp } from '@/lib/types';
-import { ColumnFiltersState, SortingState } from '@tanstack/react-table';
-import { useEffect, useState } from 'react';
+import { FilterProp, SortProp } from "@/lib/types";
+import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
 
 const api = {
   get: async <T>(url: string) => ({ data: {} as T }),
@@ -70,20 +70,25 @@ export const useDBOperations = <T>(endPoint: string) => {
       const response = await api.get<T[]>(`/${endPoint}`);
       handleDataChange(response.data);
     } catch (error) {
-      console.error('Error while fetching data:', error);
+      console.error("Error while fetching data:", error);
       throw error;
     } finally {
       toggleLoader();
     }
   };
 
-  const fetchDataPaginated = async (pageNumber: number, rowsPerPage: number) => {
+  const fetchDataPaginated = async (
+    pageNumber: number,
+    rowsPerPage: number,
+  ) => {
     try {
       toggleLoader();
-      const response = await api.get<T[]>(`/${endPoint}?page=${pageNumber}&pageSize=${rowsPerPage}`);
+      const response = await api.get<T[]>(
+        `/${endPoint}?page=${pageNumber}&pageSize=${rowsPerPage}`,
+      );
       handleDataChange(response.data);
     } catch (error) {
-      console.error('Error while fetching data:', error);
+      console.error("Error while fetching data:", error);
       throw error;
     } finally {
       toggleLoader();
@@ -100,11 +105,11 @@ export const useDBOperations = <T>(endPoint: string) => {
       if (pageNumber !== totalPages) {
         const nextPageNumber = pageNumber + 1;
         setPageNumber(nextPageNumber);
-        console.log('pageNumber', nextPageNumber);
+        console.log("pageNumber", nextPageNumber);
         await fetchDataPaginated(nextPageNumber, rowsPerPage);
       }
     } catch (error) {
-      console.error('Error while fetching data:', error);
+      console.error("Error while fetching data:", error);
       throw error;
     }
   };
@@ -117,7 +122,7 @@ export const useDBOperations = <T>(endPoint: string) => {
         await fetchDataPaginated(prevPageNumber, rowsPerPage);
       }
     } catch (error) {
-      console.error('Error while fetching data:', error);
+      console.error("Error while fetching data:", error);
       throw error;
     }
   };
@@ -137,7 +142,7 @@ export const useDBOperations = <T>(endPoint: string) => {
       await api.put<T>(`/${endPoint}/${id}`, updatedData);
       fetchAll();
     } catch (error) {
-      console.error('Error while updating data:', error);
+      console.error("Error while updating data:", error);
       throw error;
     }
   };
@@ -147,7 +152,7 @@ export const useDBOperations = <T>(endPoint: string) => {
       await api.delete<T>(`/${endPoint}/${id}`);
       fetchAll();
     } catch (error) {
-      console.error('Error while deleting data:', error);
+      console.error("Error while deleting data:", error);
       throw error;
     }
   };
@@ -168,17 +173,17 @@ export const useDBOperations = <T>(endPoint: string) => {
         .map((param) => {
           const paramName = encodeURIComponent(param.id);
           const values = Array.isArray(param.value)
-            ? param.value.map((val) => encodeURIComponent(val)).join(',')
+            ? param.value.map((val) => encodeURIComponent(val)).join(",")
             : encodeURIComponent(param.value);
           return `${paramName}=${values}`;
         })
-        .join('&');
+        .join("&");
 
       toggleLoader();
       const response = await api.get<T[]>(`/${endPoint}?${queryString}`);
       handleDataChange(response.data);
     } catch (error) {
-      console.error('Error while fetching data:', error);
+      console.error("Error while fetching data:", error);
       throw error;
     } finally {
       toggleLoader();
@@ -190,16 +195,16 @@ export const useDBOperations = <T>(endPoint: string) => {
       const queryString = paramsArray
         .map((param) => {
           const paramName = encodeURIComponent(param.id);
-          const values = encodeURIComponent(param.desc ? 'DESC' : 'ASC');
+          const values = encodeURIComponent(param.desc ? "DESC" : "ASC");
           return `${paramName}=${values}`;
         })
-        .join('&');
+        .join("&");
 
       toggleLoader();
       const response = await api.get<T[]>(`/${endPoint}?${queryString}`);
       handleDataChange(response.data);
     } catch (error) {
-      console.error('Error while fetching data:', error);
+      console.error("Error while fetching data:", error);
       throw error;
     } finally {
       toggleLoader();
@@ -212,7 +217,7 @@ export const useDBOperations = <T>(endPoint: string) => {
   }, [columnFilters]);
 
   useEffect(() => {
-    console.log('sorting', appendSortParams(sorting));
+    console.log("sorting", appendSortParams(sorting));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting]);
 

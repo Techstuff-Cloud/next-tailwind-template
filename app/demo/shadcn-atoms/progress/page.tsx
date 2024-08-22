@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { Progress } from '@/components/ui/progress';
-import Page from '@/components/ComponentWrapper';
+import * as React from "react";
+import { Progress } from "@/components/ui/progress";
+import Page from "@/components/ComponentWrapper";
 
 const ProgressComponent = () => {
   const [progress, setProgress] = React.useState(13);
@@ -12,7 +12,7 @@ const ProgressComponent = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  return <Progress value={progress} className='w-[60%]' />;
+  return <Progress value={progress} className="w-[60%]" />;
 };
 
 export default Page(ProgressComponent);

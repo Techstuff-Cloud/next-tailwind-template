@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const PrincipleSettingLayout = ({ children }: { children: React.ReactNode }) => {
+const PrincipleSettingLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <>
       <div>Principle Setting Layout</div>
@@ -9,5 +13,5 @@ const PrincipleSettingLayout = ({ children }: { children: React.ReactNode }) => 
   );
 };
 
-PrincipleSettingLayout.displayName = 'PrincipleSettingLayout';
+PrincipleSettingLayout.displayName = "PrincipleSettingLayout";
 export default PrincipleSettingLayout;

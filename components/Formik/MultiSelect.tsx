@@ -1,10 +1,20 @@
-import * as React from 'react';
-import { Option } from './types';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import { cn } from '@/lib/utils/utils';
-import { Button } from '@/components/ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import * as React from "react";
+import { Option } from "./types";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils/utils";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 type MultiSelectProp = {
   value: any[];
@@ -13,7 +23,12 @@ type MultiSelectProp = {
   onChange: (option: string[]) => void;
 };
 
-export function MultiSelectDropDown({ name, value, options, onChange }: MultiSelectProp) {
+export function MultiSelectDropDown({
+  name,
+  value,
+  options,
+  onChange,
+}: MultiSelectProp) {
   const [open, setOpen] = React.useState(false);
   const [selectedValues, setSelectedValues] = React.useState<string[]>(value);
 
@@ -28,45 +43,43 @@ export function MultiSelectDropDown({ name, value, options, onChange }: MultiSel
   };
 
   const truncatedSelectedValues =
-    selectedValues.length > 3 ? selectedValues.slice(0, 3).join(', ') + '...' : selectedValues.join(', ');
+    selectedValues.length > 3
+      ? selectedValues.slice(0, 3).join(", ") + "..."
+      : selectedValues.join(", ");
 
   return (
-    <Popover
-      open={open}
-      onOpenChange={setOpen}
-    >
-      <PopoverTrigger
-        asChild
-        className='w-full'
-      >
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild className="w-full">
         <Button
-          variant='outline'
-          role='combobox'
+          variant="outline"
+          role="combobox"
           aria-expanded={open}
-          className='w-full justify-between overflow-hidden'
+          className="w-full justify-between overflow-hidden"
           title={truncatedSelectedValues}
         >
-          {truncatedSelectedValues || 'Select framework(s)...'}
-          <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+          {truncatedSelectedValues || "Select framework(s)..."}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='!w-full !p-0'>
+      <PopoverContent className="!w-full !p-0">
         <Command>
-          <CommandInput
-            name={name}
-            placeholder='Search framework...'
-          />
+          <CommandInput name={name} placeholder="Search framework..." />
           <CommandEmpty>No framework found.</CommandEmpty>
-          <CommandGroup className='!w-full'>
+          <CommandGroup className="!w-full">
             {options.map((option: Option) => (
               <CommandItem
-                className='!w-full'
+                className="!w-full"
                 key={option.value}
                 value={option.value}
                 onSelect={() => handleToggleOption(option.value)}
               >
                 <Check
-                  className={cn('mr-2 h-4 w-4', selectedValues.includes(option.value) ? 'opacity-100' : 'opacity-0')}
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    selectedValues.includes(option.value)
+                      ? "opacity-100"
+                      : "opacity-0",
+                  )}
                 />
                 {option.label}
               </CommandItem>

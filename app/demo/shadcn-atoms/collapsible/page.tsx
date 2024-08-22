@@ -2,8 +2,8 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import Page from '@/components/ComponentWrapper';
+} from "@/components/ui/collapsible";
+import Page from "@/components/ComponentWrapper";
 
 type Props = {};
 const CollapsibleComponent = (props: Props) => {

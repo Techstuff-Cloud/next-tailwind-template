@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const ManagementPrincipleLayout = ({ children }: { children: React.ReactNode }) => {
+const ManagementPrincipleLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <>
       <div>Management Principle Layout</div>
@@ -9,6 +13,6 @@ const ManagementPrincipleLayout = ({ children }: { children: React.ReactNode }) 
   );
 };
 
-ManagementPrincipleLayout.displayName = 'ManagementPrincipleLayout';
+ManagementPrincipleLayout.displayName = "ManagementPrincipleLayout";
 
 export default ManagementPrincipleLayout;

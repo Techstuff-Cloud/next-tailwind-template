@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   ColumnDef,
   VisibilityState,
@@ -12,16 +12,23 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table';
-import { DataTablePagination } from '../components/data-table-pagination';
-import { DataTableToolbar } from '../components/data-table-toolbar';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+} from "@tanstack/react-table";
+import { DataTablePagination } from "../components/data-table-pagination";
+import { DataTableToolbar } from "../components/data-table-toolbar";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-import { useEffect } from 'react';
-import TableLoader from './tableLoader';
-import { Filter } from '@/lib/types';
-import { useDBOperations } from '@/lib/hooks/useDBOperations';
-import { FormValues } from '../data/schema';
+import { useEffect } from "react";
+import TableLoader from "./tableLoader";
+import { Filter } from "@/lib/types";
+import { useDBOperations } from "@/lib/hooks/useDBOperations";
+import { FormValues } from "../data/schema";
 
 interface DataTableProps<TData, TValue> {
   formValues: FormValues;
@@ -82,7 +89,7 @@ export function DataTable<TData, TValue>({
   });
 
   useEffect(() => {
-    console.log('APPLIED FILTER', filters);
+    console.log("APPLIED FILTER", filters);
   }, []);
 
   useEffect(() => {
@@ -91,7 +98,7 @@ export function DataTable<TData, TValue>({
   }, []);
 
   return (
-    <div className='space-y-4'>
+    <div className="space-y-4">
       <DataTableToolbar
         filters={filters}
         table={table}
@@ -102,18 +109,20 @@ export function DataTable<TData, TValue>({
       {loading ? (
         <TableLoader />
       ) : (
-        <div className='rounded-md border'>
+        <div className="rounded-md border">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead
-                        key={header.id}
-                        colSpan={header.colSpan}
-                      >
-                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      <TableHead key={header.id} colSpan={header.colSpan}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
                       </TableHead>
                     );
                   })}
@@ -125,10 +134,15 @@ export function DataTable<TData, TValue>({
                 table.getRowModel().rows.map((row) => (
                   <TableRow
                     key={row.id}
-                    data-state={row.getIsSelected() && 'selected'}
+                    data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
                     ))}
                   </TableRow>
                 ))
@@ -136,7 +150,7 @@ export function DataTable<TData, TValue>({
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
-                    className='h-24 text-center'
+                    className="h-24 text-center"
                   >
                     No results.
                   </TableCell>

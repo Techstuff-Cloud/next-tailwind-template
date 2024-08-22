@@ -1,11 +1,11 @@
-import { Toggle } from '@/components/ui/toggle';
-import Page from '@/components/ComponentWrapper';
+import { Toggle } from "@/components/ui/toggle";
+import Page from "@/components/ComponentWrapper";
 
 const ToggleComponent = () => {
   return (
     <>
-      <Toggle aria-label='Toggle italic'>Toggle</Toggle>
-      <Toggle variant='outline' aria-label='Toggle italic'>
+      <Toggle aria-label="Toggle italic">Toggle</Toggle>
+      <Toggle variant="outline" aria-label="Toggle italic">
         Toggle
       </Toggle>
     </>
