@@ -6,8 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import ThemeContext from '@/lib/stores/theme';
 import { themeList } from '@/themes/themeList';
-import ThemeContext from '@/_context/ThemeContext';
 import { useContext } from 'react';
 
 const DropdownMenuComponent = () => {

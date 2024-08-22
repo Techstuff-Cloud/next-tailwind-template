@@ -6,7 +6,7 @@ import React, { useContext } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const WrapperComponent = ({ children }: { children: React.ReactNode }) => {
+const RootLayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const { mode, theme } = useContext(ThemeContext);
 
   return (
@@ -24,4 +24,4 @@ const WrapperComponent = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default WrapperComponent;
+export default RootLayoutWrapper;

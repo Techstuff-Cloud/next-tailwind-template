@@ -1,17 +1,17 @@
-import { SettingContext } from '@/_context/ThemeContext';
-import WrapperComponent from '@/app/demo/shadcn-atoms/WrapperComponent';
+import RootLayoutWrapper from '@/components/RootLayoutWrapper.tsx';
 import { Toaster } from '@/components/ui/toaster';
+import ThemeProvider from '@/lib/stores/theme';
+import { UserContextProvider, UserWrapper } from '@/lib/stores/users';
+import { UserState } from '@/lib/stores/users/Context';
+import { decodeJwt } from 'jose';
+import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import * as React from 'react';
 import './globals.css';
-import { UserContextProvider, UserWrapper } from '@/lib/stores/users';
-import { cookies } from 'next/headers';
-import { decodeJwt } from 'jose';
-import { initialUserState, UserState } from '@/lib/stores/users/Context';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Next.JS Tailwind Template',
-  description: 'Next.JS Tailwind Template',
+  title: 'Omkala School', // TODO: Change title dynamically
+  description: 'Omkala School',
 };
 
 const orgs = [
@@ -43,9 +43,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const userInfo = (token ? decodeJwt(token) : {}) as UserState;
 
   return (
-    <SettingContext>
+    <ThemeProvider>
       <UserContextProvider>
-        <WrapperComponent>
+        <RootLayoutWrapper>
           <UserWrapper
             token={token}
             organizations={orgs}
@@ -55,8 +55,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
           {children}
           <Toaster />
-        </WrapperComponent>
+        </RootLayoutWrapper>
       </UserContextProvider>
-    </SettingContext>
+    </ThemeProvider>
   );
 }
