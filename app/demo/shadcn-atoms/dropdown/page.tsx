@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { themeList } from '@/themes/themeList';
 import ThemeContext from '@/_context/ThemeContext';
 import { useContext } from 'react';
 
@@ -19,14 +18,14 @@ const DropdownMenuComponent = () => {
         <p className='font-medium'>Themes</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {Object.keys(themeList).map((theme) => (
+        {/* {Object.keys(themeList).map((theme) => (
           <DropdownMenuItem
             key={theme}
             onClick={() => setTheme(themeList[theme])}
           >
             {theme}
           </DropdownMenuItem>
-        ))}
+        ))} */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

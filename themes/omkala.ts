@@ -19,7 +19,7 @@ export const omkalaTheme = {
     '--on-gray': '107 114 128',
     '--on-warning': '245 158 11',
     '--on-error': '239 68 68',
-    '--on-surface': '166 181 187',
+    '--on-surface': '124 124 124',
     // =~= Theme Colors  =~=
     // primary | #b5f3ae
     '--color-primary-50': '239 241 254', // #EFF1FE
@@ -99,15 +99,15 @@ export const omkalaTheme = {
     '--color-error-800': '153 27 27', // #991B1B
     '--color-error-900': '127 29 29', // #7F1D1D
     // surface | #a6b5bb
-    '--color-surface-50': '242 244 245', // #f2f4f5
-    '--color-surface-100': '237 240 241', // #edf0f1
-    '--color-surface-200': '233 237 238', // #e9edee
-    '--color-surface-300': '219 225 228', // #dbe1e4
-    '--color-surface-400': '193 203 207', // #c1cbcf
-    '--color-surface-500': '166 181 187', // #a6b5bb
-    '--color-surface-600': '149 163 168', // #95a3a8
-    '--color-surface-700': '125 136 140', // #7d888c
-    '--color-surface-800': '100 109 112', // #646d70
-    '--color-surface-900': '81 89 92', // #51595c
+    '--color-surface-50': '255 255 255', // #FFFFFF
+    '--color-surface-100': '239 239 239', // #EFEFEF
+    '--color-surface-200': '220 220 220', // #DCDCDC
+    '--color-surface-300': '189 189 189', // #BDBDBD
+    '--color-surface-400': '152 152 152', // #989898
+    '--color-surface-500': '124 124 124', // #7C7C7C
+    '--color-surface-600': '101 101 101', // #656565
+    '--color-surface-700': '82 82 82', // #525252
+    '--color-surface-800': '70 70 70', // #464646
+    '--color-surface-900': '61 61 61', // #3D3D3D
   },
 };
