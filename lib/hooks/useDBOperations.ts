@@ -1,7 +1,15 @@
 import { FilterProp, SortProp } from '@/lib/types';
 import { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
-import api from '../axiosInterceptor';
+
+const api = {
+  get: async <T>(url: string) => ({ data: {} as T }),
+  post: async <T>(url: string, data: string) => ({ data: {} as T }),
+  put: async <T>(url: string, data: any) => ({ data: {} as T }),
+  delete: async <T>(url: string) => ({ data: {} as T }),
+  patch: async <T>(url: string, data: string) => ({ data: {} as T }),
+  options: async <T>(url: string) => ({ data: {} as T }),
+};
 
 interface ResourcesState<T> {
   loading: boolean;
