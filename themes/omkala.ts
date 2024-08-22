@@ -12,13 +12,14 @@ export const omkalaTheme = {
     '--theme-rounded-container': '8px',
     '--theme-border-base': '1px',
     // =~= Theme On-X Colors =~=
-    '--on-primary': '0 0 0',
-    '--on-secondary': '0 0 0',
-    '--on-tertiary': '255 255 255',
-    '--on-success': '255 255 255',
-    '--on-warning': '0 0 0',
-    '--on-error': '255 255 255',
-    '--on-surface': '0 0 0',
+    '--on-primary': '110 98 229',
+    '--on-secondary': '31 185 108',
+    '--on-tertiary': '16 161 231',
+    '--on-success': '34 197 94',
+    '--on-gray': '107 114 128',
+    '--on-warning': '245 158 11',
+    '--on-error': '239 68 68',
+    '--on-surface': '166 181 187',
     // =~= Theme Colors  =~=
     // primary | #b5f3ae
     '--color-primary-50': '239 241 254', // #EFF1FE

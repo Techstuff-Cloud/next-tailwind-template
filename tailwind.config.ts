@@ -3,9 +3,6 @@ import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
-import { myCustomThemeFour, myCustomThemeOne, myCustomThemeThree, myCustomThemeTwo } from './themes/base';
-import { muiTheme1 } from './themes/theme1';
-import { muiTheme2 } from './themes/theme2';
 import { omkalaTheme } from './themes/omkala';
 
 const config = {
@@ -90,13 +87,19 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
-      fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-      },
+      // fontFamily: {
+      //   poppins: ['Poppins', 'sans-serif'],
+      // },
     },
   },
   plugins: [
-    function ({ addUtilities, e }: { addUtilities: any; e: (className: string) => string }) {
+    function ({
+      addUtilities,
+      e,
+    }: {
+      addUtilities: any;
+      e: (className: string) => string;
+    }) {
       const newUtilities = {
         [`button.${e('bg-tertiary')}:hover`]: {
           backgroundColor: `rgb(var(--color-tertiary-400)) !important`,
@@ -119,7 +122,7 @@ const config = {
     skeleton({
       themes: {
         preset: ['skeleton'],
-        custom: [myCustomThemeOne, myCustomThemeTwo, myCustomThemeThree, myCustomThemeFour, muiTheme1, muiTheme2,omkalaTheme],
+        custom: [omkalaTheme],
       },
     }),
   ],
