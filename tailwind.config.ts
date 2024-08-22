@@ -114,7 +114,6 @@ const config = {
     animate,
     skeleton({
       themes: {
-        preset: ['skeleton'],
         custom: [myCustomThemeOne, myCustomThemeTwo, myCustomThemeThree, myCustomThemeFour, muiTheme1, muiTheme2],
       },
     }),
