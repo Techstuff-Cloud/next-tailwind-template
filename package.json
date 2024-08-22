@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prepare": "husky install",
+    "prettier": "prettier --write .",
     "lint": "next lint"
   },
   "dependencies": {
@@ -67,6 +68,7 @@
     "eslint-config-next": "latest",
     "husky": "^9.1.4",
     "postcss": "latest",
+    "prettier": "^3.3.3",
     "tailwindcss": "latest",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "latest"
