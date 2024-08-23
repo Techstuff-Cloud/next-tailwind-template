@@ -13,6 +13,18 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    /* Gray color variants: #6B7280 */
+    --color-gray-50: 247 248 248; /* #F7F8F8 */
+    --color-gray-100: 237 238 241; /* #EDEEF1 */
+    --color-gray-200: 216 219 223; /* #D8DBDF */
+    --color-gray-300: 182 186 195; /* #B6BAC3 */
+    --color-gray-400: 142 149 162; /* #8E95A2 */
+    --color-gray-500: 107 114 128; /* #6B7280 */
+    --color-gray-600: 91 97 110; /* #5B616E */
+    --color-gray-700: 74 78 90; /* #4A4E5A */
+    --color-gray-800: 64 68 76; /* #40444C */
+    --color-gray-900: 56 58 66; /* #383A42 */
   }
 
   .dark {

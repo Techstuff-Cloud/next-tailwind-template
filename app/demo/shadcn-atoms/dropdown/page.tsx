@@ -1,14 +1,8 @@
-"use client";
+'use client';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import ThemeContext from "@/lib/stores/theme";
-import { themeList } from "@/themes/themeList";
-import { useContext } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { ThemeContext } from '@/lib/stores/theme';
+import { useContext } from 'react';
 
 const DropdownMenuComponent = () => {
   const { setTheme, theme } = useContext(ThemeContext);
@@ -16,17 +10,17 @@ const DropdownMenuComponent = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <p className="font-medium">Themes</p>
+        <p className='font-medium'>Themes</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {Object.keys(themeList).map((theme) => (
+        {/* {Object.keys(themeList).map((theme) => (
           <DropdownMenuItem
             key={theme}
             onClick={() => setTheme(themeList[theme])}
           >
             {theme}
           </DropdownMenuItem>
-        ))}
+        ))} */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
