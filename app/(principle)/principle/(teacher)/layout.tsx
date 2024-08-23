@@ -1,14 +1,18 @@
-import React from 'react';
+import React from "react";
 
-const PrincipleTeacherLayout = ({ children }: { children: React.ReactNode }) => {
+const PrincipleTeacherLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <>
-      <div>Principle Teacher Layout</div> 
+      <div>Principle Teacher Layout</div>
       {children}
     </>
   );
 };
 
-PrincipleTeacherLayout.displayName = 'PrincipleTeacherLayout';
+PrincipleTeacherLayout.displayName = "PrincipleTeacherLayout";
 
 export default PrincipleTeacherLayout;

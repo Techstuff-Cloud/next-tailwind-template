@@ -1,12 +1,7 @@
 'use client';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import ThemeContext from '@/_context/ThemeContext';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { ThemeContext } from '@/lib/stores/theme';
 import { useContext } from 'react';
 
 const DropdownMenuComponent = () => {

@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import Page from '@/components/ComponentWrapper';
+} from "@/components/ui/dialog";
+import Page from "@/components/ComponentWrapper";
 
 const DialogComponent = () => {
   return (

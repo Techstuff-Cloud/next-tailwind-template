@@ -1,20 +1,23 @@
 'use client';
 
+import { ThemeContext } from '@/lib/stores/theme';
+import { Inter } from 'next/font/google';
 import React, { useContext } from 'react';
-import ThemeContext from '@/_context/ThemeContext';
-import { Poppins } from 'next/font/google';
 
-const poppins = Poppins({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 const WrapperComponent = ({ children }: { children: React.ReactNode }) => {
   const { mode, theme } = useContext(ThemeContext);
 
   return (
-    <html lang='en' className={mode}>
-      <body data-theme={theme} className={poppins.className}>
+    <html
+      lang='en'
+      className={mode}
+    >
+      <body
+        data-theme={theme}
+        className={inter.className}
+      >
         {children}
       </body>
     </html>

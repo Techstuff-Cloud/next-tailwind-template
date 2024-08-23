@@ -1,4 +1,5 @@
 This is a template repository for [Next.js](https://nextjs.org/) application configured with
+
 - [pnpm](https://pnpm.io)
 - [tailwind](https://tailwindcss.com/)
 - [skeleton](https://www.skeleton.dev/)

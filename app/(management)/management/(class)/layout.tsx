@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ManagementClassLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,6 +9,6 @@ const ManagementClassLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-ManagementClassLayout.displayName = 'ManagementClassLayout';
+ManagementClassLayout.displayName = "ManagementClassLayout";
 
 export default ManagementClassLayout;

@@ -1,7 +1,7 @@
-import { useField } from 'formik';
-import React from 'react';
-import { Input } from '../ui/input';
-import { FormikFieldProp } from './types';
+import { useField } from "formik";
+import React from "react";
+import { Input } from "../ui/input";
+import { FormikFieldProp } from "./types";
 
 const FormilNestedInput = ({ label, ...props }: FormikFieldProp) => {
   const [field, meta, helpers] = useField(props);
@@ -15,7 +15,7 @@ const FormilNestedInput = ({ label, ...props }: FormikFieldProp) => {
         onChange={(e) => helpers.setValue(e.target.value)}
       />
       {meta.touched && meta.error ? (
-        <div className='error text-red-500 mt-2'>{meta.error}</div>
+        <div className="error text-red-500 mt-2">{meta.error}</div>
       ) : null}
     </div>
   );

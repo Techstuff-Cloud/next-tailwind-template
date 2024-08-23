@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { cn } from '@/lib/utils/utils';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { useRouter } from 'next/navigation';
-import { useUserContext } from '@/lib/stores/users';
+import { cn } from "@/lib/utils/utils";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+import { useUserContext } from "@/lib/stores/users";
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginForm({ className, ...props }: LoginFormProps) {
   const [formData, setFormData] = React.useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [error, setError] = React.useState('');
+  const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
   const { userDispatch } = useUserContext();
@@ -26,32 +26,41 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       event.preventDefault();
       setIsLoading(true);
 
-      const res = await fetch('/api/login', {
-        method: 'POST',
+      const res = await fetch("/api/login", {
+        method: "POST",
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
       if (data.success) {
-        const userInfoRes = await fetch('/api/user');
+        const userInfoRes = await fetch("/api/user");
         const parsedUserInfo = await userInfoRes.json();
 
         if (!parsedUserInfo?.userInfo) {
-          throw new Error('User info not found');
+          throw new Error("User info not found");
         }
 
-        userDispatch({ type: 'SET_CLAIMS', claims: parsedUserInfo.userInfo?.claims });
-        userDispatch({ type: 'SET_ROLES', roles: parsedUserInfo.userInfo?.roles });
-        userDispatch({ type: 'SET_ACTIVE_SUBSCRIPTION', activeSubscription: parsedUserInfo.userInfo?.activePlan });
+        userDispatch({
+          type: "SET_CLAIMS",
+          claims: parsedUserInfo.userInfo?.claims,
+        });
+        userDispatch({
+          type: "SET_ROLES",
+          roles: parsedUserInfo.userInfo?.roles,
+        });
+        userDispatch({
+          type: "SET_ACTIVE_SUBSCRIPTION",
+          activeSubscription: parsedUserInfo.userInfo?.activePlan,
+        });
 
-        router.replace('/');
+        router.replace("/");
       } else {
         setError(data.message);
       }
     } catch (error) {
-      console.log('Failed to login:', error);
-      setError('An unknown error occurred');
+      console.log("Failed to login:", error);
+      setError("An unknown error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -66,58 +75,50 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
   };
 
   return (
-    <div
-      className={cn('grid gap-6', className)}
-      {...props}
-    >
+    <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={onSubmit}>
-        <div className='grid gap-2'>
-          <div className='grid gap-1'>
+        <div className="grid gap-2">
+          <div className="grid gap-1">
             <Label>Email</Label>
             <Input
-              id='email'
-              placeholder='name@example.com'
-              type='email'
-              autoCapitalize='none'
-              autoComplete='email'
-              autoCorrect='off'
+              id="email"
+              placeholder="name@example.com"
+              type="email"
+              autoCapitalize="none"
+              autoComplete="email"
+              autoCorrect="off"
               disabled={isLoading}
               value={formData.email}
               onChange={handleChange}
             />
           </div>
-          <div className='grid gap-1'>
+          <div className="grid gap-1">
             <Label>Password</Label>
             <Input
-              id='password'
-              type='password'
+              id="password"
+              type="password"
               disabled={isLoading}
               value={formData.password}
               onChange={handleChange}
             />
           </div>
-          <div className='my-4 text-red-500'>{error}</div>
-          <button
-            type='submit'
-            disabled={isLoading}
-          >
+          <div className="my-4 text-red-500">{error}</div>
+          <button type="submit" disabled={isLoading}>
             Sign In
           </button>
         </div>
       </form>
-      <div className='relative'>
-        <div className='absolute inset-0 flex items-center'>
-          <span className='w-full border-t' />
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
         </div>
-        <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">
+            Or continue with
+          </span>
         </div>
       </div>
-      <Button
-        variant='outline'
-        type='button'
-        disabled={isLoading}
-      >
+      <Button variant="outline" type="button" disabled={isLoading}>
         {/* {isLoading ? (
           <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
         ) : (

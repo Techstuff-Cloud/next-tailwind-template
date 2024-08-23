@@ -105,13 +105,7 @@ const config = {
     },
   },
   plugins: [
-    function ({
-      addUtilities,
-      e,
-    }: {
-      addUtilities: any;
-      e: (className: string) => string;
-    }) {
+    function ({ addUtilities, e }: { addUtilities: any; e: (className: string) => string }) {
       const newUtilities = {
         [`button.${e('bg-tertiary')}:hover`]: {
           backgroundColor: `rgb(var(--color-tertiary-400)) !important`,

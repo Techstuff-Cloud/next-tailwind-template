@@ -1,5 +1,5 @@
-import { StudentLayout, StudentLayoutTabs } from '@/modules/student';
-import React from 'react';
+import { StudentLayout, StudentLayoutTabs } from "@/modules/student";
+import React from "react";
 
 const StudentAppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -13,5 +13,5 @@ const StudentAppLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-StudentAppLayout.displayName = 'StudentAppLayout';
+StudentAppLayout.displayName = "StudentAppLayout";
 export default StudentAppLayout;
