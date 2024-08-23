@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import React, { useContext } from 'react';
-import ThemeContext from '@/_context/ThemeContext';
-import { Inter } from 'next/font/google';
+import { ThemeContext } from "@/lib/stores/theme";
+import { Inter } from "next/font/google";
+import React, { useContext } from "react";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 const WrapperComponent = ({ children }: { children: React.ReactNode }) => {
   const { mode, theme } = useContext(ThemeContext);
 
   return (
-    <html lang='en' className={mode}>
+    <html lang="en" className={mode}>
       <body data-theme={theme} className={inter.className}>
         {children}
       </body>

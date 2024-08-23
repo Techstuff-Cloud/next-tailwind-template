@@ -1,6 +1,6 @@
-import React from 'react';
-import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { Button } from '../ui/button';
+import React from "react";
+import NextLink, { LinkProps as NextLinkProps } from "next/link";
+import { Button } from "../ui/button";
 
 export interface LinkProps extends NextLinkProps {
   disabled?: boolean;
@@ -13,19 +13,11 @@ const Link = (props: LinkProps) => {
   return (
     <>
       {disabled ? (
-        <Button
-          size='sm'
-          variant='link'
-          disabled
-        >
+        <Button size="sm" variant="link" disabled>
           {restProps.children}
         </Button>
       ) : (
-        <Button
-          asChild
-          size='sm'
-          variant='link'
-        >
+        <Button asChild size="sm" variant="link">
           <NextLink {...restProps} />
         </Button>
       )}
@@ -33,5 +25,5 @@ const Link = (props: LinkProps) => {
   );
 };
 
-Link.displayName = 'Link';
+Link.displayName = "Link";
 export default Link;

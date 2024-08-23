@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const ManagementStudentLayout = ({ children }: { children: React.ReactNode }) => {
+const ManagementStudentLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <>
       <div>Management Student Layout</div>
@@ -9,6 +13,6 @@ const ManagementStudentLayout = ({ children }: { children: React.ReactNode }) =>
   );
 };
 
-ManagementStudentLayout.displayName = 'ManagementStudentLayout';
+ManagementStudentLayout.displayName = "ManagementStudentLayout";
 
 export default ManagementStudentLayout;

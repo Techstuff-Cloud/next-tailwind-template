@@ -2,8 +2,8 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/components/ui/hover-card';
-import Page from '@/components/ComponentWrapper';
+} from "@/components/ui/hover-card";
+import Page from "@/components/ComponentWrapper";
 
 const HoverCardComponent = () => {
   return (

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
-import Page from '@/components/ComponentWrapper';
+import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import Page from "@/components/ComponentWrapper";
 
 const ToastComponent = () => {
   const { toast } = useToast();
@@ -13,17 +13,17 @@ const ToastComponent = () => {
       <Button
         onClick={() => {
           toast({
-            description: 'Your message has been sent.',
+            description: "Your message has been sent.",
           });
         }}
       >
         Default Toast
-      </Button>{' '}
+      </Button>{" "}
       <Button
         onClick={() => {
           toast({
-            variant: 'destructive',
-            description: 'Your message has been sent.',
+            variant: "destructive",
+            description: "Your message has been sent.",
           });
         }}
       >

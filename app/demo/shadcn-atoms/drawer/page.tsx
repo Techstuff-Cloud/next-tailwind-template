@@ -7,9 +7,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
-import Page from '@/components/ComponentWrapper';
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import Page from "@/components/ComponentWrapper";
 
 const DrawerComponent = () => {
   return (
@@ -23,7 +23,7 @@ const DrawerComponent = () => {
         <DrawerFooter>
           <Button>Submit</Button>
           <DrawerClose>
-            <Button variant='outline'>Cancel</Button>
+            <Button variant="outline">Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { UserState, useUserContext } from './Context';
+import { useEffect } from "react";
+import { UserState, useUserContext } from "./Context";
 
 interface UserWrapperProps extends Partial<UserState> {}
 
@@ -10,23 +10,29 @@ export const UserWrapper = (props: UserWrapperProps) => {
   const { userDispatch } = useUserContext();
 
   useEffect(() => {
-    userDispatch({ type: 'SET_TOKEN', token: token || '' });
+    userDispatch({ type: "SET_TOKEN", token: token || "" });
   }, [token, userDispatch]);
 
   useEffect(() => {
-    userDispatch({ type: 'SET_ACTIVE_SUBSCRIPTION', activeSubscription: activeSubscription || '' });
+    userDispatch({
+      type: "SET_ACTIVE_SUBSCRIPTION",
+      activeSubscription: activeSubscription || "",
+    });
   }, [activeSubscription, userDispatch]);
 
   useEffect(() => {
-    userDispatch({ type: 'SET_ORGANIZATIONS', organizations: organizations || [] });
+    userDispatch({
+      type: "SET_ORGANIZATIONS",
+      organizations: organizations || [],
+    });
   }, [organizations, userDispatch]);
 
   useEffect(() => {
-    userDispatch({ type: 'SET_CLAIMS', claims: claims || [] });
+    userDispatch({ type: "SET_CLAIMS", claims: claims || [] });
   }, [claims, userDispatch]);
 
   useEffect(() => {
-    userDispatch({ type: 'SET_ROLES', roles: roles || [] });
+    userDispatch({ type: "SET_ROLES", roles: roles || [] });
   }, [roles, userDispatch]);
 
   return null;

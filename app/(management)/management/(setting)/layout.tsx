@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const ManagementSettingLayout = ({ children }: { children: React.ReactNode }) => {
+const ManagementSettingLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <>
       <div>Management Setting Layout</div>
@@ -9,6 +13,6 @@ const ManagementSettingLayout = ({ children }: { children: React.ReactNode }) =>
   );
 };
 
-ManagementSettingLayout.displayName = 'ManagementSettingLayout';
+ManagementSettingLayout.displayName = "ManagementSettingLayout";
 
 export default ManagementSettingLayout;

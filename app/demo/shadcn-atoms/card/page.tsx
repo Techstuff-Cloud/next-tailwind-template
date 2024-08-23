@@ -5,12 +5,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import Page from '@/components/ComponentWrapper';
+} from "@/components/ui/card";
+import Page from "@/components/ComponentWrapper";
 
 const CardComponent = () => {
   return (
-    <Card className='w-full'>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Card Description</CardDescription>

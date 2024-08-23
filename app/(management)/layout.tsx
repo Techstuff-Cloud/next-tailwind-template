@@ -1,13 +1,17 @@
-import React from 'react';
-import ManagementNavbar from './navbar';
+import React from "react";
+import ManagementNavbar from "./navbar";
 
-export default function ManagementLayout({ children }: { children: React.ReactNode }) {
+export default function ManagementLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <section className='p-10'>
+    <section className="p-10">
       <div>ManagementLayout</div>
       <ManagementNavbar />
 
-      <div className='mt-8'>{children}</div>
+      <div className="mt-8">{children}</div>
     </section>
   );
 }

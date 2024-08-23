@@ -1,5 +1,5 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import Page from '@/components/ComponentWrapper';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Page from "@/components/ComponentWrapper";
 
 const AlertDemo = () => {
   return (
@@ -11,7 +11,7 @@ const AlertDemo = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert variant='destructive'>
+      <Alert variant="destructive">
         <AlertTitle>Heads up!</AlertTitle>
         <AlertDescription>
           You can add components to your app using the cli.

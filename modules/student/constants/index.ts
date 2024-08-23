@@ -1,1 +1,1 @@
-export * from './studentLayoutTabsData';
+export * from "./studentLayoutTabsData";

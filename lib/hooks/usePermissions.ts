@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useUserContext } from '../stores/users';
+import { useEffect, useState } from "react";
+import { useUserContext } from "../stores/users";
 
 /**
  * Returns an array of booleans indicating whether each permission in the input array is present in the user's claims.
@@ -19,7 +19,9 @@ export const usePermissions = (permissions: string[]): boolean[] => {
   const { userState } = useUserContext();
 
   useEffect(() => {
-    const permsData = permissions.map((perm) => userState.claims?.includes(perm));
+    const permsData = permissions.map((perm) =>
+      userState.claims?.includes(perm),
+    );
     setPerms(permsData);
   }, [userState.claims]);
 

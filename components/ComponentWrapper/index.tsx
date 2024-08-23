@@ -4,7 +4,7 @@ import {
   PropsWithChildren,
   ReactNode,
   Ref,
-} from 'react';
+} from "react";
 
 type ComponentProps = {
   children?: ReactNode;
@@ -13,11 +13,11 @@ type ComponentProps = {
 const Page = (Component: ComponentType<ComponentProps>) => {
   const WithPageStyles = (
     props: PropsWithChildren<ComponentProps>,
-    ref: Ref<any>
+    ref: Ref<any>,
   ) => (
     <div
       ref={ref}
-      className='flex flex-grow items-center flex-col pt-20 gap-20 mx-auto min-w-[600px]'
+      className="flex flex-grow items-center flex-col pt-20 gap-20 mx-auto min-w-[600px]"
       {...props}
     >
       <Component {...props} />
