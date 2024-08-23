@@ -39,46 +39,6 @@ const config = {
           800: 'rgb(var(--color-gray-800))',
           900: 'rgb(var(--color-gray-900))',
         },
-        primary: {
-          DEFAULT: `rgb(var(--color-primary-500))`,
-          foreground: `rgb(var(--color-primary-50))`,
-        },
-        secondary: {
-          DEFAULT: `rgb(var(--color-secondary-500))`,
-          foreground: `rgb(var(--color-secondary-50))`,
-        },
-        tertiary: {
-          DEFAULT: `rgb(var(--color-tertiary-500))`,
-          foreground: `rgb(var(--color-tertiary-50))`,
-        },
-        success: {
-          DEFAULT: `rgb(var(--color-success-500))`,
-          foreground: `rgb(var(--color-success-50))`,
-        },
-        warning: {
-          DEFAULT: `rgb(var(--color-warning-500))`,
-          foreground: `rgb(var(--color-warning-50))`,
-        },
-        destructive: {
-          DEFAULT: `rgb(var(--color-error-500))`,
-          foreground: `rgb(var(--color-error-50))`,
-        },
-        muted: {
-          DEFAULT: `rgb(var(--color-surface-100))`,
-          foreground: `rgb(var(--color-surface-600))`,
-        },
-        accent: {
-          DEFAULT: `rgb(var(--color-tertiary-500))`,
-          foreground: `rgb(var(--color-tertiary-200))`,
-        },
-        popover: {
-          DEFAULT: `rgb(var(--color-surface-50))`,
-          foreground: `rgb(var(--color-surface-700))`,
-        },
-        card: {
-          DEFAULT: `rgb(var(--color-surface-200))`,
-          foreground: `rgb(var(--color-surface-900))`,
-        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -99,9 +59,9 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
-      // fontFamily: {
-      //   poppins: ['Poppins', 'sans-serif'],
-      // },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [

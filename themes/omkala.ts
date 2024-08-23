@@ -1,6 +1,6 @@
-import { CustomThemeConfig } from '@skeletonlabs/tw-plugin';
+import type { CustomThemeConfig } from '@skeletonlabs/tw-plugin';
 
-export const omkalaTheme = {
+export const omkalaTheme: CustomThemeConfig = {
   name: 'omkala-theme',
   properties: {
     // =~= Theme Properties =~=
@@ -16,12 +16,11 @@ export const omkalaTheme = {
     '--on-secondary': '31 185 108',
     '--on-tertiary': '16 161 231',
     '--on-success': '34 197 94',
-    '--on-gray': '107 114 128',
     '--on-warning': '245 158 11',
     '--on-error': '239 68 68',
     '--on-surface': '124 124 124',
     // =~= Theme Colors  =~=
-    // primary | #b5f3ae
+    // primary | #6E62E5
     '--color-primary-50': '239 241 254', // #EFF1FE
     '--color-primary-100': '226 229 253', // #E2E5FD
     '--color-primary-200': '203 207 250', // #CBCFFA
@@ -32,7 +31,7 @@ export const omkalaTheme = {
     '--color-primary-700': '90 66 192', // #5A42C0
     '--color-primary-800': '73 56 155', // #49389B
     '--color-primary-900': '63 52 123', // #3F347B
-    // secondary | #ea14bf
+    // secondary | #1FB96C
     '--color-secondary-50': '237 252 242', // #EDFCF2
     '--color-secondary-100': '212 247 223', // #D4F7DF
     '--color-secondary-200': '173 237 197', // #ADEDC5
@@ -43,18 +42,7 @@ export const omkalaTheme = {
     '--color-secondary-700': '13 111 66', // #0D6F42
     '--color-secondary-800': '13 88 54', // #0D5836
     '--color-secondary-900': '11 73 46', // #0B492E
-    // gray | #ea14bf
-    '--color-gray-50': '247 248 248', // #F7F8F8
-    '--color-gray-100': '237 238 241', // #EDEEF1
-    '--color-gray-200': '216 219 223', // #D8DBDF
-    '--color-gray-300': '182 186 195', // #B6BAC3
-    '--color-gray-400': '142 149 162', // #8E95A2
-    '--color-gray-500': '107 114 128', // #6B7280
-    '--color-gray-600': '91 97 110', // #5B616E
-    '--color-gray-700': '74 78 90', // #4A4E5A
-    '--color-gray-800': '64 68 76', // #40444C
-    '--color-gray-900': '56 58 66', // #383A42
-    // tertiary | #955183
+    // tertiary | #10A1E7
     '--color-tertiary-50': '240 249 255', // #F0F9FF
     '--color-tertiary-100': '224 242 254', // #E0F2FE
     '--color-tertiary-200': '187 229 252', // #BBE5FC
@@ -65,7 +53,7 @@ export const omkalaTheme = {
     '--color-tertiary-700': '5 103 159', // #05679F
     '--color-tertiary-800': '8 87 132', // #085784
     '--color-tertiary-900': '13 73 109', // #0D496D
-    // success | #b84b0e
+    // success | #22C55E
     '--color-success-50': '240 253 245', // #F0FDF5
     '--color-success-100': '220 252 232', // #DCFCE8
     '--color-success-200': '187 247 209', // #BBF7D1
@@ -76,7 +64,7 @@ export const omkalaTheme = {
     '--color-success-700': '21 128 60', // #15803C
     '--color-success-800': '22 101 51', // #166533
     '--color-success-900': '20 83 43', // #14532B
-    // warning | #eab08c
+    // warning | #F59E0B
     '--color-warning-50': '255 248 235', // #FFF8EB
     '--color-warning-100': '254 234 199', // #FEEAC7
     '--color-warning-200': '253 210 138', // #FDD28A
@@ -87,7 +75,7 @@ export const omkalaTheme = {
     '--color-warning-700': '180 116 9', // #B47409
     '--color-warning-800': '146 97 14', // #92610E
     '--color-warning-900': '120 81 15', // #78510F
-    // error | #ac074f
+    // error | #EF4444
     '--color-error-50': '254 242 242', // #FEF2F2
     '--color-error-100': '254 226 226', // #FEE2E2
     '--color-error-200': '254 202 202', // #FECACA
@@ -98,7 +86,7 @@ export const omkalaTheme = {
     '--color-error-700': '185 28 28', // #B91C1C
     '--color-error-800': '153 27 27', // #991B1B
     '--color-error-900': '127 29 29', // #7F1D1D
-    // surface | #a6b5bb
+    // surface | #7C7C7C
     '--color-surface-50': '255 255 255', // #FFFFFF
     '--color-surface-100': '239 239 239', // #EFEFEF
     '--color-surface-200': '220 220 220', // #DCDCDC
