@@ -25,6 +25,8 @@
     --color-gray-700: 74 78 90; /* #4A4E5A */
     --color-gray-800: 64 68 76; /* #40444C */
     --color-gray-900: 56 58 66; /* #383A42 */
+
+    scrollbar-color: unset;
   }
 
   .dark {
@@ -46,6 +48,23 @@
   }
 }
 
-.scrollbar::-webkit-scrollbar-track {
-  background-color: inherit !important;
+@layer utilities {
+  html {
+    scrollbar-color: unset;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--color-surface-300)) !important;
+    border-radius: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background-color: rgb(var(--color-surface-100)) !important;
+    border-radius: 8px;
+  }
 }
