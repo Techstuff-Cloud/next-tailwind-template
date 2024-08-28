@@ -47,7 +47,7 @@ const Sidebar = (props: SidebarProps) => {
     const option = sidebarOptions.find((option) => isActivePath(option.href));
 
     handleSidebarLinkClick(option as SidebarOption);
-  }, []);
+  }, [pathname]);
 
   return (
     <aside className={cn('sticky top-[82px] bg-surface-50 max-w-[268px] h-full overflow-x-hidden')}>
