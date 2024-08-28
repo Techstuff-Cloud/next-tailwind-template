@@ -3,14 +3,18 @@ import {
   BookOpenText,
   BookUser,
   Bus,
+  Contact,
   LayoutDashboard,
+  LayoutList,
   LogOut,
+  NotebookTabs,
   Settings,
   ShieldCheck,
   SquareDivide,
   User,
   Users,
 } from 'lucide-react';
+import { SidebarOption } from './types';
 
 export const iconsMapping = {
   'layout-dashboard': LayoutDashboard,
@@ -24,9 +28,12 @@ export const iconsMapping = {
   'square-divide': SquareDivide,
   settings: Settings,
   'log-out': LogOut,
+  'notebook-tabs': NotebookTabs,
+  'layout-list': LayoutList,
+  contact: Contact,
 };
 
-export const sidebarOptions = [
+export const sidebarOptions: SidebarOption[] = [
   {
     id: '01',
     label: 'Dashboard',
@@ -45,20 +52,26 @@ export const sidebarOptions = [
       {
         id: '02.01',
         label: 'Admission Enquiry',
-        iconName: '',
+        iconName: 'layout-list',
         href: '/front-office/admission-enquiry',
+        hasSubOptions: false,
+        subOptions: [],
       },
       {
         id: '02.02',
         label: 'Visitor Book',
-        iconName: '',
+        iconName: 'notebook-tabs',
         href: '/front-office/visitor-book',
+        hasSubOptions: false,
+        subOptions: [],
       },
       {
         id: '02.03',
         label: 'Feedback',
-        iconName: '',
+        iconName: 'contact',
         href: '/front-office/feedback',
+        hasSubOptions: false,
+        subOptions: [],
       },
     ],
   },
