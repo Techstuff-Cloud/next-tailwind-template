@@ -4,6 +4,7 @@ import { ThemeContext } from '@/lib/stores/theme';
 import { Poppins } from 'next/font/google';
 import React, { useContext } from 'react';
 import UserLayout from '../UserLayout';
+import { TooltipProvider } from '../ui/tooltip';
 
 const poppins = Poppins({
   weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
@@ -22,7 +23,9 @@ const RootLayoutWrapper = ({ children }: { children: React.ReactNode }) => {
         data-theme={theme}
         className={poppins.className}
       >
-        <UserLayout>{children}</UserLayout>
+        <TooltipProvider delayDuration={200}>
+          <UserLayout>{children}</UserLayout>
+        </TooltipProvider>
       </body>
     </html>
   );
