@@ -18,7 +18,7 @@ const ListItem = forwardRef(({ children, onClick, isActivePath, ...props }: any,
       ref={ref}
       onClick={onClick}
       className={cn(
-        'w-full flex items-center gap-3 p-3 rounded-xl text-gray-500 text-sm bg-transparent hover:cursor-pointer',
+        'w-full flex items-center gap-3 p-3 rounded-[10px] text-gray-500 text-sm bg-transparent hover:cursor-pointer',
         isActivePath ? 'bg-primary-500 text-gray-50' : 'hover:bg-primary-50 hover:text-primary-500'
       )}
       {...props}
@@ -42,8 +42,7 @@ export const SidebarItem = ({ iconName, label, isActivePath, onClick, showNested
         >
           {Icon && (
             <Icon
-              height={24}
-              width={24}
+              className='min-w-6 min-h-6'
               stroke='currentColor'
             />
           )}
@@ -64,8 +63,7 @@ export const SidebarItem = ({ iconName, label, isActivePath, onClick, showNested
     >
       {Icon && (
         <Icon
-          height={24}
-          width={24}
+          className='min-w-6 min-h-6'
           stroke='currentColor'
         />
       )}
