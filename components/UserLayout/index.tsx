@@ -4,25 +4,29 @@ import Sidebar from './Sidebar';
 
 const UserLayout = ({ children }: { children: ReactNode }) => {
   const [showSidebarToggleButton, setShowSidebarToggleButton] = useState(false);
-  const [showFullNestedSidebar, setShowFullNestedSidebar] = useState(false);
+  const [nestedSidebarExpanded, setNestedSidebarExpanded] = useState(false);
 
-  const toggelFullNestedSidebar = useCallback(() => {
-    setShowFullNestedSidebar((show) => !show);
+  const toggelNestedSidebarExpand = useCallback(() => {
+    setNestedSidebarExpanded((show) => !show);
   }, []);
 
   return (
     <div className='min-h-screen h-full w-full bg-surface-50'>
       <div className='sticky top-0 z-50 w-full h-[82px]'>
         <Appbar
-          onToggleSidebar={toggelFullNestedSidebar}
-          showSidebar={showFullNestedSidebar}
+          onToggleSidebar={toggelNestedSidebarExpand}
+          showSidebar={nestedSidebarExpanded}
           showToggleButton={showSidebarToggleButton}
         />
       </div>
       <div className='w-full flex'>
-        <Sidebar setShowSidebarToggleButton={setShowSidebarToggleButton} />
+        <Sidebar
+          nestedSidebarExpanded={nestedSidebarExpanded}
+          setShowSidebarToggleButton={setShowSidebarToggleButton}
+          setNestedSidebarExpanded={setNestedSidebarExpanded}
+        />
 
-        <div className='p-6 bg-body min-h-[calc(100vh_-_82px)] h-full w-[calc(100%_-_268px)]'>{children}</div>
+        <div className='p-6 bg-body min-h-[calc(100vh_-_82px)] h-full flex-grow'>{children}</div>
       </div>
     </div>
   );
