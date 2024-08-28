@@ -40,8 +40,27 @@ export const sidebarOptions = [
     label: 'Front Office',
     iconName: 'users',
     href: '/front-office',
-    hasSubOptions: false,
-    subOptions: [],
+    hasSubOptions: true,
+    subOptions: [
+      {
+        id: '02.01',
+        label: 'Admission Enquiry',
+        iconName: '',
+        href: '/front-office/admission-enquiry',
+      },
+      {
+        id: '02.02',
+        label: 'Visitor Book',
+        iconName: '',
+        href: '/front-office/visitor-book',
+      },
+      {
+        id: '02.03',
+        label: 'Feedback',
+        iconName: '',
+        href: '/front-office/feedback',
+      },
+    ],
   },
   {
     id: '03',
