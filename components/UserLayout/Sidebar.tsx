@@ -52,7 +52,7 @@ const Sidebar = (props: SidebarProps) => {
   return (
     <div
       className={cn(
-        'bg-transparent max-w-[268px] max-h-[calc(100vh_-_82px)] flex border-r border-r-surface-100 transition-all overflow-y-auto scrollbar'
+        'bg-transparent max-w-[268px] max-h-[calc(100vh_-_82px)] flex border-r border-r-surface-100 transition-all overflow-x-hidden overflow-y-auto scrollbar'
       )}
     >
       <div className={cn(hasSubOptions ? 'w-[68px] border-r border-r-surface-100' : 'w-[268px]')}>
