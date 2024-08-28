@@ -6,11 +6,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 
 interface AppbarProps {
   showSidebar: boolean;
+  showToggleButton: boolean;
   onToggleSidebar: () => void;
 }
 
 const Appbar = (props: AppbarProps) => {
-  const { onToggleSidebar, showSidebar } = props;
+  const { onToggleSidebar, showSidebar, showToggleButton } = props;
 
   return (
     <div className='bg-transparent h-full flex items-center border-b border-surface-100'>
@@ -31,26 +32,28 @@ const Appbar = (props: AppbarProps) => {
           The Shishukunj International School
         </p>
 
-        <div className='absolute -right-4 top-[50%] -translate-y-[50%]'>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant='default'
-                size='icon'
-                className='w-8 h-8 rounded-full'
-                onClick={onToggleSidebar}
-              >
-                <ChevronRight
-                  size={20}
-                  className={`transition-transform ${showSidebar ? 'rotate-180' : 'rotate-0'}`}
-                />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent className='bg-primary-500 text-gray-50'>
-              <p>Toggle Sidebar</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
+        {showToggleButton && (
+          <div className='absolute -right-4 top-[50%] -translate-y-[50%]'>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant='default'
+                  size='icon'
+                  className='w-8 h-8 rounded-full'
+                  onClick={onToggleSidebar}
+                >
+                  <ChevronRight
+                    size={20}
+                    className={`transition-transform ${showSidebar ? 'rotate-180' : 'rotate-0'}`}
+                  />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className='bg-primary-500 text-gray-50'>
+                <p>Toggle Sidebar</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        )}
       </div>
     </div>
   );
