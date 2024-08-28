@@ -14,7 +14,7 @@ const Appbar = (props: AppbarProps) => {
   const { onToggleSidebar, showSidebar, showToggleButton } = props;
 
   return (
-    <div className='bg-transparent h-full flex items-center border-b border-surface-100'>
+    <div className='bg-surface-50 h-full flex items-center border-b border-surface-100 z-50'>
       <div className='w-[68px] h-full flex justify-center items-center border-r border-r-surface-100'>
         <Link href='/'>
           <Image

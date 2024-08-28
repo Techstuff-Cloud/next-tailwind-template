@@ -50,62 +50,65 @@ const Sidebar = (props: SidebarProps) => {
   }, []);
 
   return (
-    <div
-      className={cn(
-        'bg-transparent max-w-[268px] max-h-[calc(100vh_-_82px)] flex border-r border-r-surface-100 transition-all overflow-x-hidden overflow-y-auto scrollbar'
-      )}
-    >
-      <div className={cn(hasSubOptions ? 'w-[68px] border-r border-r-surface-100' : 'w-[268px]')}>
-        <div className='h-full w-full p-2.5 box-border flex flex-col gap-40 justify-between'>
-          <ul className='w-full flex flex-col gap-1.5'>
-            {sidebarOptions.map((option) => (
-              <Link
-                href={option.hasSubOptions ? option.subOptions[0]?.href : option.href}
-                key={option.id}
-                onClick={() => handleSidebarLinkClick(option)}
-              >
-                <SidebarItem
-                  iconName={option.iconName}
-                  label={option.label}
-                  isActivePath={isActivePath(option.href)}
-                  showNestedSidebar={hasSubOptions}
-                />
-              </Link>
-            ))}
-          </ul>
+    <aside className={cn('sticky top-[82px] bg-surface-50 max-w-[268px] h-full overflow-x-hidden')}>
+      <div className='h-full w-full flex border-r border-r-surface-100 transition-all max-h-[calc(100vh_-_82px)] overflow-y-auto scrollbar'>
+        <div className={cn('h-full flex flex-col', hasSubOptions ? 'w-[68px]' : 'w-[268px]')}>
+          <div
+            className={cn(
+              'min-h-[calc(100vh_-_82px)] w-full flex-1 p-2.5 box-border flex flex-col gap-40 justify-between',
+              hasSubOptions && 'border-r border-r-surface-100'
+            )}
+          >
+            <ul className='w-full flex flex-col gap-1.5'>
+              {sidebarOptions.map((option) => (
+                <Link
+                  href={option.hasSubOptions ? option.subOptions[0]?.href : option.href}
+                  key={option.id}
+                  onClick={() => handleSidebarLinkClick(option)}
+                >
+                  <SidebarItem
+                    iconName={option.iconName}
+                    label={option.label}
+                    isActivePath={isActivePath(option.href)}
+                    showNestedSidebar={hasSubOptions}
+                  />
+                </Link>
+              ))}
+            </ul>
 
-          <ul className='w-full flex flex-col gap-1.5'>
-            <SidebarItem
-              label='Settings'
-              iconName='settings'
-              onClick={() => console.log('Settings')}
-              showNestedSidebar={hasSubOptions}
-            />
-            <SidebarItem
-              label='Logout'
-              iconName='log-out'
-              onClick={() => console.log('Logout')}
-              showNestedSidebar={hasSubOptions}
-            />
-          </ul>
+            <ul className='w-full flex flex-col gap-1.5'>
+              <SidebarItem
+                label='Settings'
+                iconName='settings'
+                onClick={() => console.log('Settings')}
+                showNestedSidebar={hasSubOptions}
+              />
+              <SidebarItem
+                label='Logout'
+                iconName='log-out'
+                onClick={() => console.log('Logout')}
+                showNestedSidebar={hasSubOptions}
+              />
+            </ul>
+          </div>
         </div>
+
+        {hasSubOptions && (
+          <div
+            className={cn(
+              'h-full transition-all',
+              hasSubOptions ? 'block' : 'hidden',
+              nestedSidebarExpanded ? 'w-[200px]' : 'w-[50px]'
+            )}
+          >
+            <NestedSidebar
+              expanded={nestedSidebarExpanded}
+              sidebarOptions={activeOption?.subOptions || []}
+            />
+          </div>
+        )}
       </div>
-
-      {hasSubOptions && (
-        <div
-          className={cn(
-            'h-full transition-all',
-            hasSubOptions ? 'block' : 'hidden',
-            nestedSidebarExpanded ? 'w-[200px]' : 'w-[50px]'
-          )}
-        >
-          <NestedSidebar
-            expanded={nestedSidebarExpanded}
-            sidebarOptions={activeOption?.subOptions || []}
-          />
-        </div>
-      )}
-    </div>
+    </aside>
   );
 };
 

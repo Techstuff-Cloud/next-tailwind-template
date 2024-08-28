@@ -12,14 +12,14 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className='min-h-screen h-full w-full bg-surface-50'>
-      <div className='sticky top-0 z-50 w-full h-[82px]'>
+      <header className='sticky top-0 z-50 w-full h-[82px]'>
         <Appbar
           onToggleSidebar={toggelNestedSidebarExpand}
           showSidebar={nestedSidebarExpanded}
           showToggleButton={showSidebarToggleButton}
         />
-      </div>
-      <div className='w-full flex'>
+      </header>
+      <main className='w-full flex'>
         <Sidebar
           nestedSidebarExpanded={nestedSidebarExpanded}
           setShowSidebarToggleButton={setShowSidebarToggleButton}
@@ -27,7 +27,7 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
         />
 
         <div className='p-6 bg-body min-h-[calc(100vh_-_82px)] h-full flex-grow'>{children}</div>
-      </div>
+      </main>
     </div>
   );
 };
