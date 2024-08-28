@@ -3,6 +3,7 @@ import Appbar from './Appbar';
 import Sidebar from './Sidebar';
 
 const UserLayout = ({ children }: { children: ReactNode }) => {
+  const [showSidebarToggleButton, setShowSidebarToggleButton] = useState(false);
   const [showFullNestedSidebar, setShowFullNestedSidebar] = useState(false);
 
   const toggelFullNestedSidebar = useCallback(() => {
@@ -15,10 +16,11 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
         <Appbar
           onToggleSidebar={toggelFullNestedSidebar}
           showSidebar={showFullNestedSidebar}
+          showToggleButton={showSidebarToggleButton}
         />
       </div>
       <div className='w-full flex'>
-        <Sidebar />
+        <Sidebar setShowSidebarToggleButton={setShowSidebarToggleButton} />
 
         <div className='p-6 bg-body min-h-[calc(100vh_-_82px)] h-full w-[calc(100%_-_268px)]'>{children}</div>
       </div>
