@@ -60,7 +60,7 @@ const Sidebar = (props: SidebarProps) => {
           <ul className='w-full flex flex-col gap-1.5'>
             {sidebarOptions.map((option) => (
               <Link
-                href={option.href}
+                href={option.hasSubOptions ? option.subOptions[0]?.href : option.href}
                 key={option.id}
                 onClick={() => handleSidebarLinkClick(option)}
               >
