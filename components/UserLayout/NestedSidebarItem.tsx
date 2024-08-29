@@ -20,7 +20,9 @@ const ListItem = forwardRef(({ children, onClick, isActivePath, ...props }: any,
       onClick={onClick}
       className={cn(
         'w-full h-[50px] flex items-center gap-2.5 p-3 text-gray-400 text-sm bg-transparent hover:cursor-pointer',
-        isActivePath ? 'bg-primary-100 text-primary-500' : 'hover:bg-primary-50/50 hover:text-primary-500'
+        isActivePath
+          ? 'bg-primary-100/50 text-primary-500 font-medium'
+          : 'hover:bg-primary-50/50 hover:text-primary-500'
       )}
       {...props}
     >
