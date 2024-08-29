@@ -15,11 +15,16 @@ interface SidebarProps {
 
 const Sidebar = (props: SidebarProps) => {
   const [activeOption, setActiveOption] = useState<SidebarOption | null>(null);
+  const [isPageLoadedForFirstTime, setIsPageLoadedForFirstTime] = useState<boolean>(true);
   const pathname = usePathname();
 
   const { setShowSidebarToggleButton, setNestedSidebarExpanded, nestedSidebarExpanded } = props;
 
   const hasSubOptions = useMemo(() => activeOption?.hasSubOptions, [activeOption]);
+  const expandSidebar = useMemo(
+    () => !hasSubOptions && isPageLoadedForFirstTime,
+    [hasSubOptions, isPageLoadedForFirstTime]
+  );
 
   const isActivePath = useCallback(
     (path: string) => {
@@ -31,7 +36,11 @@ const Sidebar = (props: SidebarProps) => {
     [pathname]
   );
 
-  const handleSidebarLinkClick = useCallback((option: SidebarOption) => {
+  const handleSidebarLinkClick = useCallback((option: SidebarOption, isClick?: boolean) => {
+    if (isClick) {
+      setIsPageLoadedForFirstTime(false);
+    }
+
     if (option.hasSubOptions) {
       setActiveOption(option);
       setShowSidebarToggleButton(true);
@@ -52,7 +61,7 @@ const Sidebar = (props: SidebarProps) => {
   return (
     <aside className={cn('sticky top-[82px] bg-surface-50 max-w-[268px] h-full overflow-x-hidden')}>
       <div className='h-full w-full flex border-r border-r-surface-100 transition-all max-h-[calc(100vh_-_82px)] overflow-y-auto scrollbar'>
-        <div className={cn('h-full flex flex-col', hasSubOptions ? 'w-[68px]' : 'w-[268px]')}>
+        <div className={cn('h-full flex flex-col', expandSidebar ? 'w-[268px]' : 'w-[68px]')}>
           <div
             className={cn(
               'min-h-[calc(100vh_-_82px)] w-full flex-1 p-2.5 box-border flex flex-col gap-40 justify-between',
@@ -64,13 +73,13 @@ const Sidebar = (props: SidebarProps) => {
                 <Link
                   href={option.hasSubOptions ? option.subOptions[0]?.href : option.href}
                   key={option.id}
-                  onClick={() => handleSidebarLinkClick(option)}
+                  onClick={() => handleSidebarLinkClick(option, true)}
                 >
                   <SidebarItem
                     iconName={option.iconName}
                     label={option.label}
                     isActivePath={isActivePath(option.href)}
-                    showNestedSidebar={hasSubOptions}
+                    showNestedSidebar={!expandSidebar}
                   />
                 </Link>
               ))}
@@ -81,13 +90,13 @@ const Sidebar = (props: SidebarProps) => {
                 label='Settings'
                 iconName='settings'
                 onClick={() => console.log('Settings')}
-                showNestedSidebar={hasSubOptions}
+                showNestedSidebar={!expandSidebar}
               />
               <SidebarItem
                 label='Logout'
                 iconName='log-out'
                 onClick={() => console.log('Logout')}
-                showNestedSidebar={hasSubOptions}
+                showNestedSidebar={!expandSidebar}
               />
             </ul>
           </div>
