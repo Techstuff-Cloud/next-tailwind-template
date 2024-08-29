@@ -140,3 +140,29 @@ export const sidebarOptions: SidebarOption[] = [
     subOptions: [],
   },
 ];
+
+export const settingRouteOption: SidebarOption = {
+  id: '11',
+  label: 'Settings',
+  iconName: 'settings',
+  href: '/settings',
+  hasSubOptions: true,
+  subOptions: [
+    {
+      id: '11.01',
+      label: 'Roles',
+      iconName: 'shield-check',
+      href: '/settings/roles',
+      hasSubOptions: false,
+      subOptions: [],
+    },
+    {
+      id: '11.02',
+      label: 'Users & Permissions',
+      iconName: 'users',
+      href: '/settings/permissions',
+      hasSubOptions: false,
+      subOptions: [],
+    },
+  ],
+};

@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { sidebarOptions } from './constants';
+import { settingRouteOption, sidebarOptions } from './constants';
 import { NestedSidebar } from './NestedSidebar';
 import { SidebarItem } from './SidebarItem';
 import { SidebarOption } from './types';
@@ -53,7 +53,7 @@ const Sidebar = (props: SidebarProps) => {
   }, []);
 
   useEffect(() => {
-    const option = sidebarOptions.find((option) => isActivePath(option.href));
+    const option = sidebarOptions.concat(settingRouteOption).find((option) => isActivePath(option.href));
 
     handleSidebarLinkClick(option as SidebarOption);
   }, [pathname]);
@@ -86,12 +86,17 @@ const Sidebar = (props: SidebarProps) => {
             </ul>
 
             <ul className='w-full flex flex-col gap-1.5'>
-              <SidebarItem
-                label='Settings'
-                iconName='settings'
-                onClick={() => console.log('Settings')}
-                showNestedSidebar={!expandSidebar}
-              />
+              <Link
+                href='/settings/roles'
+                onClick={() => handleSidebarLinkClick(settingRouteOption, true)}
+              >
+                <SidebarItem
+                  label={settingRouteOption.label}
+                  iconName={settingRouteOption.iconName}
+                  showNestedSidebar={!expandSidebar}
+                  isActivePath={isActivePath(settingRouteOption.href)}
+                />
+              </Link>
               <SidebarItem
                 label='Logout'
                 iconName='log-out'
