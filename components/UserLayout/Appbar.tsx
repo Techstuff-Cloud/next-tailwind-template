@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+import { NavigationBreadcrumb } from './NavigationBreadcrumb';
 
 interface AppbarProps {
   showSidebar: boolean;
@@ -54,6 +55,14 @@ const Appbar = (props: AppbarProps) => {
             </Tooltip>
           </div>
         )}
+      </div>
+
+      <div className='flex-1 flex justify-between items-center px-6 py-4'>
+        <div>
+          <NavigationBreadcrumb />
+        </div>
+
+        <div>{/* TODO: Add user profile here */}</div>
       </div>
     </div>
   );
